@@ -291,9 +291,9 @@ Checklist de confirmation :
 - `.agents/encyclopedies/LAZY_EAGER_ENCYCLOPEDIE.adoc` — Méthodologie complète + historique sessions (COLD)
 
 *Projets connectés* :
-- `plantuml-gradle` — `/home/cheroliv/workspace/__repositories__/plantuml-gradle/plantuml-plugin/`
-- `bakery-gradle` — `~/workspace/__repositories__/bakery-gradle/bakery-plugin/`
-- `cheroliv.com` — `~/workspace/__repositories__/cheroliv.com/`
+- `plantuml-gradle` — `/home/cheroliv/workspace/foundry/plantuml-gradle/plantuml-plugin/`
+- `bakery-gradle` — `~/workspace/foundry/bakery-gradle/bakery-plugin/`
+- `cheroliv.com` — `~/workspace/foundry/cheroliv.com/`
 
 *Articles méthodologie* :
 - 0108 — Stratégie Eager/Lazy : https://cheroliv.com/blog/2026/04/27/gouvernance-agent-opencode-eager-lazy.html

@@ -41,7 +41,7 @@ Mission : extraire TOUTE la substantifique moelle des 16 fichiers `../*.md` pare
 
 . 19 occurrences de `../` dans les `.adoc` nettoyées (remplacées par pointeurs vers `.agents/*.adoc`)
 . Vérification zéro `../` sur l'ensemble des `.adoc` (grep confirmé)
-. Confirmation emplacement mp3-organizer : `/home/cheroliv/workspace/__repositories__/newpipe-gradle/mp3-organizer/`
+. Confirmation emplacement mp3-organizer : `/home/cheroliv/workspace/foundry/newpipe-gradle/mp3-organizer/`
 . Vérification des seuils EAGER (559 lignes, sous le seuil 800)
 
 == Résultats

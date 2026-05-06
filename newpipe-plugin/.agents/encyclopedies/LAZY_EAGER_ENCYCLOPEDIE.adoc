@@ -300,7 +300,7 @@ Chaque semaine :
 == Annexe F — Projets Connectés (mp3-organizer inside newpipe-gradle/)
 
 *mp3-organizer* est un sous-projet de `newpipe-gradle/` :
-- *Emplacement* : `/home/cheroliv/workspace/__repositories__/newpipe-gradle/mp3-organizer/`
+- *Emplacement* : `/home/cheroliv/workspace/foundry/newpipe-gradle/mp3-organizer/`
 - *Build* : `./gradlew build` (depuis `mp3-organizer/`)
 - *Version catalog* : `mp3-organizer/gradle/libs.versions.toml` ✅ déjà en place
 - *Module IA* : `mp3-organizer/src/main/kotlin/com/mp3organizer/ai/` (LlmClient.kt, PlaylistAgent.kt, SqlGenerationAgent.kt, MaintenanceAgent.kt, PlaySmartTask.kt, PlayArtistTask.kt, PlayGenreTask.kt)

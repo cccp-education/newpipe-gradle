@@ -40,7 +40,7 @@ Ce fichier définit la mission de la session en cours.
 - Authentification Google : `client_secrets/` + `sessions.yml` (⚠️ gitignore)
 - EPIC Download Auth : 42/42 points (100%) dans `AGENT.adoc` + `MIGRATION_REFERENCE.adoc`
 - EPIC LLM Integration : roadmap sessions 4-6 dans `.agents/encyclopedies/LAZY_EAGER_ENCYCLOPEDIE.adoc` (Annexe H)
-- mp3-organizer : `/home/cheroliv/workspace/__repositories__/newpipe-gradle/mp3-organizer/`
+- mp3-organizer : `/home/cheroliv/workspace/foundry/newpipe-gradle/mp3-organizer/`
 
 *Rappel règles* :
 . `publishToMavenLocal` obligatoire après toute modif du code Kotlin

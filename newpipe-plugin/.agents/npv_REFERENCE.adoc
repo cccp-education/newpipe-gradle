@@ -462,9 +462,9 @@ export NEWPIPE_OUTPUT_PATH="/chemin/vers/downloads"
 
 == Projets Locaux
 
-- `newpipe-gradle` : `/home/cheroliv/workspace/__repositories__/newpipe-gradle`
+- `newpipe-gradle` : `/home/cheroliv/workspace/foundry/newpipe-gradle`
 - `mp3-organizer` : `/home/cheroliv/Musique/abdo/mp3-organizer`
-- `plantuml-gradle` : `/home/cheroliv/workspace/__repositories__/plantuml-gradle`
+- `plantuml-gradle` : `/home/cheroliv/workspace/foundry/plantuml-gradle`
 
 === mp3-organizer (Structure)
 
