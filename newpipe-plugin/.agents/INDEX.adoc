@@ -74,7 +74,7 @@ _Sessions antérieures_ : le projet `newpipe-gradle/` a 9 sessions pré-gouverna
 |===
 | Projet | Session | Dernière activité
 | `plantuml-gradle/plantuml-plugin` | ~138 | EPIC 13 multi-provider
-| `magic_stick` | ~065 | Gouvernance audit + EPICs ISO
+| `magic-stick` | ~065 | Gouvernance audit + EPICs ISO
 | `bakery-gradle/bakery-plugin` | ~013 | EPIC 4 Firebase contact
 | `cheroliv.com` | ~018 | US-27 Firebase + refonte Hero
 | `jhipster-gradle-plugins` | ~006 | EPIC 5 tests finalisés

@@ -422,7 +422,7 @@ Scenario: Toutes sessions invalides → Fallback anonyme + message clair
 3. Vérifier que `gh auth status` fonctionne après configuration
 4. Ne **jamais** lire puis afficher le contenu d'un fichier de credentials (site.yml, .env, etc.)
 
-**Leçon de la Session 008 (magic_stick)** : L'agent a affiché le contenu de `site.yml` contenant un token GitHub dans le terminal, puis a utilisé `GH_TOKEN=xxx gh run list` qui affiche le token dans l'historique shell. L'utilisateur streamait son terminal sur Discord. Token compromis en 1 seconde.
+**Leçon de la Session 008 (magic-stick)** : L'agent a affiché le contenu de `site.yml` contenant un token GitHub dans le terminal, puis a utilisé `GH_TOKEN=xxx gh run list` qui affiche le token dans l'historique shell. L'utilisateur streamait son terminal sur Discord. Token compromis en 1 seconde.
 
 ---
 
