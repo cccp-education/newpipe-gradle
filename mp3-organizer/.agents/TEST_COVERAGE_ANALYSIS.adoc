@@ -1,0 +1,13 @@
+= Test Coverage Analysis — Mp3 Organizer
+
+_Statut_ : ⚠️ ZÉRO TEST — gap critique
+
+== Objectif session 001
+
+Créer les premiers tests unitaires pour :
+. Models.kt — serialization, immutability, validation
+. Mp3Scanner.kt — extraction tags ID3
+. Database.kt — mock R2DBC transactions
+. Export*.kt — formats JSON/YAML/XML/SQL valides
+
+Cible : 20+ tests en session 001.

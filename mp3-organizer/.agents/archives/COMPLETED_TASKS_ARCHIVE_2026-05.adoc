@@ -1,0 +1,6 @@
+= Completed Tasks Archive — Mai 2026
+
+|===
+| Date | Session | EPIC/US | Description
+| 2026-05-12 | 000 | MP3-0 | Bootstrap gouvernance agent mp3-organizer. Création opencode.json, AGENT.adoc, PROMPT_REPRISE.adoc, .agents/INDEX.adoc, SESSION_CHECKLIST.adoc, SESSIONS_HISTORY.adoc, TEST_COVERAGE_ANALYSIS.adoc, COMPLETED_TASKS_ARCHIVE_2026-05.adoc.
+|===

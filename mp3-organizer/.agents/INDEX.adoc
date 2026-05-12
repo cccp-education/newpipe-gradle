@@ -1,0 +1,77 @@
+= INDEX — Mp3 Organizer
+:toc:
+
+_Règles absolues_ : voir `AGENT.adoc`
+_Projet_ : mp3-organizer — gestionnaire MP3 PostgreSQL + LLM (application standalone)
+_Ontologie spatiale_ : voir `configuration/.agents/AGENT_GOVERNANCE.adoc`
+
+_Création gouvernance_ : 2026-05-12 (Session 000 — Bootstrap)
+_Session en cours_ : 000 — Bootstrap gouvernance agent
+
+'''
+== RÈGLES ABSOLUES (résumé)
+
+=== 1. COMMITS/GIT — INTERDICTION FORMELLE
+=== 2. FICHIERS DE CONFIG — BACKUP AVANT MODIF
+=== 3. TESTS EN FIN DE SESSION — INTERDIT sans permission
+=== 4. 6 ÉTAPES FIN DE SESSION
+
+'''
+== Architecture
+
+[source]
+----
+newpipe-gradle/                      # REPO GIT
+├── newpipe-plugin/
+├── mp3-organizer/                   # ⭐ RACINE DE TRAVAIL
+│   ├── AGENT.adoc / PROMPT_REPRISE / opencode.json
+│   ├── build.gradle.kts / settings.gradle.kts / gradlew
+│   ├── .agents/                     # GOUVERNANCE
+│   └── src/                         # 27 Kotlin + SQL + 0 test
+└── settings.gradle.kts
+----
+
+'''
+== Composants Existants
+
+|===
+| Couche | Fichiers | État
+| Core | Database.kt, Mp3Scanner.kt, Models.kt, OrganizeFiles.kt, FullProcess.kt | ✅
+| Export | ExportJson/Yaml/Xml/Sql.kt | ✅
+| AI | 10 classes LangChain4j + Ollama | ✅
+| Playlist | XspfGenerator.kt | ✅
+| SQL | 01_schema.sql (PostgreSQL) | ✅
+| Tests | **0 test** | ❌ CRITIQUE
+|===
+
+'''
+== Roadmap
+
+|===
+| EPIC | Description | Statut
+| MP3-0 | Bootstrap gouvernance agent | ✅ (session 000)
+| MP3-1 | Création tests unitaires (gap critique) | À FAIRE
+| MP3-2 | CI/CD build + compile | À FAIRE
+| MP3-3 | Intégration api-key-pool | À FAIRE
+| MP3-4 | Refactoring database abstraction | À FAIRE
+| MP3-5 | Documentation usage complète | À FAIRE
+|===
+
+'''
+== Sessions
+
+|===
+| # | Date | Type | Sujet | Score
+| 000 | 2026-05-12 | governance | Bootstrap gouvernance agent | 10/10
+|===
+
+'''
+== Portefeuille — Projets Gouvernés
+
+|===
+| Projet | Chemin | DAG | Sessions
+| newpipe-plugin | `../newpipe-plugin/` | N2 | 4+
+| mp3-organizer | `.` | hors DAG | 0
+| magic-stick | `foundry/public/magic-stick/` | N2 | 69+
+| plantuml-gradle | `foundry/public/plantuml-gradle/plantuml-plugin/` | N2 | 138+
+|===

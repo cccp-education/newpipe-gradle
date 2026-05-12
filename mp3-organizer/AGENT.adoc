@@ -1,0 +1,177 @@
+= Mp3 Organizer — Directives Agent
+:toc: left
+:toclevels: 3
+:icons: font
+:sectnums:
+
+[CAUTION]
+====
+**ARRÊT OBLIGATOIRE** avant `rm`, `Write` (écrasement), ou suppression de fichier :
+1. LIRE le fichier en entier
+2. VÉRIFIER `git ls-files -- <fichier>` (si pas dans git = pas de retour possible)
+3. DEMANDER confirmation fichier par fichier à l'utilisateur
+4. ATTENDRE "oui" avant d'agir
+====
+
+== Avertissement — Racine de Travail
+
+**Ce fichier est dans `newpipe-gradle/mp3-organizer/`**, la racine de travail du projet.
+Le répertoire racine du repo git est `newpipe-gradle/`. La gouvernance vit dans le
+sous-projet mp3-organizer, selon le pattern standard foundry.
+
+* Les chemins sont relatifs à **`newpipe-gradle/mp3-organizer/`**
+* L'agent travaille depuis **`newpipe-gradle/mp3-organizer/`**
+* `../` = `newpipe-gradle/` (racine repo git)
+* `../newpipe-plugin/` = plugin Gradle sibling
+* Les commandes Gradle s'exécutent depuis le répertoire courant (`./gradlew`)
+
+== Projet
+
+**Nom** : mp3-organizer — gestionnaire de collection MP3 avec PostgreSQL + LLM
+**Stack** : Kotlin, Gradle (application plugin), PostgreSQL (R2DBC), JAudiotagger, LangChain4j, Ollama
+**DAG** : hors DAG (application standalone)
+**Documentation** : AsciiDoc
+
+=== Objectif
+
+Scanner des répertoires MP3, extraire les tags ID3 (artiste, album, titre, genre),
+stocker dans PostgreSQL, exporter en JSON/YAML/XML/SQL, organiser les fichiers par artiste,
+générer des playlists VLC, et interagir en langage naturel via LLM local (Ollama).
+
+=== Contexte — Cercles de Confiance
+
+Ce projet vit dans `foundry/public/newpipe-gradle/mp3-organizer/` → *cercle 4 (public)*.
+- Ne pas référencer de secrets ici (ils sont dans `configuration/`, cercle 1)
+- Voir `configuration/.agents/AGENT_GOVERNANCE.adoc` pour l'ontologie spatiale complète
+
+== Règles Absolues
+
+=== Git
+
+**INTERDICTION FORMELLE** de commit/push/merge sans permission explicite de l'utilisateur.
+Autorisé (lecture seule) : `git status`, `git diff`, `git log`, `git show`
+Interdit (sauf ordre) : `git add`, `git commit`, `git push`, `git merge`, `git rebase`
+
+=== Tests
+
+L'agent NE DOIT JAMAIS lancer de tests en fin de session SANS permission explicite.
+
+=== Sécurité
+
+* Jamais de secrets en dur dans le code
+* Jamais de credentials dans les fichiers de config
+* Jamais de tokens API commités dans Git
+
+=== Fichiers de configuration — RÈGLE ABSOLUE DE SÛRETÉ
+
+**INTERDICTIONS** :
+* **NE JAMAIS écraser** un fichier de configuration existant avec un `Write` complet
+* **NE JAMAIS remplacer** des valeurs sensibles existantes par des placeholders
+* **NE JAMAIS modifier** un fichier sans avoir **d'abord** vérifié `git check-ignore`
+
+**Procédure OBLIGATOIRE** : backup avant modif fichier non tracké, préserver valeurs sensibles, privilégier edit partiel.
+
+=== Fichiers personnels — Interdiction de modifier
+
+L'agent NE DOIT JAMAIS modifier `~/.gitconfig`, `~/.bashrc`, `~/.ssh/config`, `~/.zshrc`, etc.
+
+=== Méthodologie de Travail
+
+* **1 fichier à la fois** + compilation immédiate
+* **Contexte léger** : Maximum 50k tokens EAGER (~3000 lignes)
+* **Règle d'or** : 5x20min > 1x2h
+
+== Architecture du Projet
+
+[source,bash]
+----
+newpipe-gradle/                      # REPO GIT
+├── newpipe-plugin/                  # Plugin Gradle (sibling)
+├── mp3-organizer/                   # ⭐ RACINE DE TRAVAIL
+│   ├── AGENT.adoc                   # Directives complètes (ce fichier)
+│   ├── PROMPT_REPRISE.adoc          # Mission session en cours (EAGER)
+│   ├── opencode.json                # Config opencode
+│   ├── build.gradle.kts             # application plugin + dependencies
+│   ├── settings.gradle.kts          # rootProject.name = "mp3-organizer"
+│   ├── gradlew + gradle/
+│   ├── .agents/                     # Gouvernance agent
+│   │   ├── INDEX.adoc               # Roadmap + statut EPICs
+│   │   ├── SESSIONS_HISTORY.adoc    # Historique
+│   │   ├── SESSION_CHECKLIST.adoc   # Checklist
+│   │   ├── TEST_COVERAGE_ANALYSIS.adoc
+│   │   ├── sessions/
+│   │   ├── archives/
+│   │   └── encyclopedies/
+│   └── src/
+│       ├── main/kotlin/com/mp3organizer/
+│       │   ├── Database.kt, Mp3Scanner.kt, Models.kt
+│       │   ├── ExportJson/Yaml/Xml/Sql.kt
+│       │   ├── OrganizeFiles.kt, BusinessQueries.kt
+│       │   ├── FullProcess.kt, PortainerClient.kt
+│       │   ├── ai/ — LlmClient, SqlGenerationAgent, etc.
+│       │   └── playlist/ — XspfGenerator.kt
+│       ├── main/sql/01_schema.sql   # PostgreSQL schema
+│       └── test/                    # ⚠️ AUCUN TEST (gap critique)
+└── settings.gradle.kts
+----
+
+=== Composants Clés
+
+* **Database.kt** : Connexion R2DBC PostgreSQL
+* **Mp3Scanner.kt** : Scan récursif, extraction tags ID3 (JAudiotagger)
+* **Export*.kt** : Export JSON/YAML/XML/SQL
+* **OrganizeFiles.kt** : Organisation par artiste
+* **ai/** : 10 classes LangChain4j + Ollama (SQL generation, chat, maintenance, playlists)
+* **playlist/XspfGenerator.kt** : Génération playlists VLC
+* **01_schema.sql** : PostgreSQL — tables, vues, fonctions stockées
+
+=== Commandes Utiles
+
+[source,shell]
+----
+# Depuis mp3-organizer/ (répertoire courant)
+./gradlew compileKotlin
+./gradlew run
+----
+
+== Gestion du Contexte
+
+* **`PROMPT_REPRISE.adoc`** → mission session en cours
+* **`.agents/INDEX.adoc`** → roadmap et statut EPICs
+
+== Session Procedure
+
+=== Début de Session
+
+1. Lire `PROMPT_REPRISE.adoc`
+2. Lire `.agents/INDEX.adoc`
+3. `git status`
+4. `./gradlew compileKotlin`
+
+=== Fin de Session — 6 étapes obligatoires
+
+1. Rapport de session → `.agents/sessions/{N}-{sujet}.adoc`
+2. Mise à jour `PROMPT_REPRISE.adoc` (max 70 lignes)
+3. Mise à jour `INDEX.adoc`
+4. Mise à jour `SESSIONS_HISTORY.adoc`
+5. Mise à jour `TEST_COVERAGE_ANALYSIS.adoc` (si tests modifiés)
+6. Mise à jour `COMPLETED_TASKS_ARCHIVE.adoc`
+
+== Conventions de Code
+
+* Kotlin idiomatique
+* Tests : JUnit5 + Kotlin test (à créer)
+* Documentation : AsciiDoc (.adoc)
+* Package : `com.mp3organizer`
+
+== Anti-Patterns
+
+[cols="1,3,3"]
+|===
+| # | Anti-pattern | Correction
+| 1 | **Agent sans opencode.json** | `opencode.json` AVANT AGENT.adoc
+| 2 | **PROMPT_REPRISE fantôme** | Mise à jour obligatoire en fin de session
+| 3 | **Archive vide** | Jamais de "TODO"
+| 4 | **Session trop longue** | Splitter > 50 messages
+| 5 | **Split-brain .agents/** | UNIQUE dans le sous-projet
+|===
