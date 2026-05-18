@@ -10,7 +10,6 @@ import java.io.File
 
 object NewpipeManager {
 
-    const val NEWPIPE_GROUP = "newpipe"
     const val CONFIG_PATH_EXCEPTION_MESSAGE = "Configuration file not found or is a directory"
     const val REGEX_CLEAN_TUNE_NAME = "[^a-zA-Z0-9\\s\\-_]"
 
@@ -20,7 +19,8 @@ object NewpipeManager {
         .registerKotlinModule()
 
     fun Project.registerDownloadTask(extension: NewpipeExtension, config: Selection) {
-        tasks.register("downloadMusic", DownloadMusicTask::class.java) {
+        tasks.register("collectMusic", DownloadMusicTask::class.java) {
+            group = "collect"
             this.outputPath = extension.outputPath.get()
             this.ffmpegDockerImage = extension.ffmpegDockerImage.get()
             this.forceDocker = extension.forceDocker.get()
@@ -38,25 +38,28 @@ object NewpipeManager {
         val extension = project.extensions.getByType(NewpipeExtension::class.java)
 
         project.tasks.register("buildSessions", BuildSessionsTask::class.java) {
+            group = "build"
             clientSecretsDir = extension.clientSecretsDir.get()
             sessionsPath = extension.sessionsPath.get()
         }
 
         val authSessions = project.tasks.register("authSessions", AuthSessionTask::class.java) {
+            group = "setup"
             sessionsPath = extension.sessionsPath.get()
             dependsOn("buildSessions")
         }
 
         project.tasks.register("sessionStatus", SessionStatusTask::class.java) {
+            group = "info"
             sessionsPath = extension.sessionsPath.get()
-            group = NEWPIPE_GROUP
         }
 
         project.tasks.register("newpipeInteractive", InteractiveCliTask::class.java) {
-            group = NEWPIPE_GROUP
+            group = "info"
         }
 
-        project.tasks.register("download", DownloadMusicTask::class.java) {
+        project.tasks.register("collectMedia", DownloadMusicTask::class.java) {
+            group = "collect"
             outputPath = extension.outputPath.get()
             ffmpegDockerImage = extension.ffmpegDockerImage.get()
             forceDocker = extension.forceDocker.get()

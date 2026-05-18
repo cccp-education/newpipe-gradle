@@ -1,6 +1,5 @@
 package com.cheroliv.newpipe
 
-import com.cheroliv.newpipe.NewpipeManager.NEWPIPE_GROUP
 import com.cheroliv.newpipe.NewpipeManager.yamlMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import kotlinx.coroutines.delay
@@ -42,7 +41,7 @@ open class AuthSessionTask : DefaultTask() {
     }
 
     init {
-        group       = NEWPIPE_GROUP
+        group       = "setup"
         description = "Authenticates Google accounts in sessions.yml via OAuth2 Device Flow"
     }
 

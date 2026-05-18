@@ -47,7 +47,7 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-newpipe = { id = "com.cheroliv.newpipe", version.ref = "newpipe" }
+newpipe = { id = "education.cccp.newpipe", version.ref = "newpipe" }
 publish = { id = "com.gradle.plugin-publish", version.ref = "plugin-publish" }
 
 [bundles]

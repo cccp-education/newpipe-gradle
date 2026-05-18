@@ -174,7 +174,7 @@ class DownloaderPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.tasks.register("buildSessions", BuildSessionsTask::class.java)
         project.tasks.register("authSessions", AuthSessionTask::class.java)
-        project.tasks.register("downloadMusic", DownloadMusicTask::class.java)
+        project.tasks.register("collectMusic", DownloadMusicTask::class.java)
         project.tasks.register("sessionStatus", SessionStatusTask::class.java)
     }
 }
@@ -191,7 +191,7 @@ Fichier : `newpipe/src/main/kotlin/com/cheroliv/newpipe/DownloaderPlugin.kt`
          │
          ▼
 ┌─────────────────────────────────────────────────────────────┐
-│  downloadMusic Task (DownloadMusicTask.kt)                   │
+│  collectMusic Task (DownloadMusicTask.kt)                    │
 └─────────────────────────────────────────────────────────────┘
          │
          ▼
@@ -404,9 +404,11 @@ newpipe-extractor = { module = "com.github.TeamNewPipe:NewPipeExtractor", versio
 
 === Téléchargement
 ```bash
-./gradlew downloadMusic --url="URL_YOUTUBE"
-./gradlew downloadMusic --url="URL" --output="./ma_musique"
-./gradlew downloadMusic       # Depuis musics.yml
+./gradlew collectMusic --url="URL_YOUTUBE"
+
+./gradlew collectMusic --url="URL" --output="./ma_musique"
+
+./gradlew collectMusic       # Depuis musics.yml
 ./gradlew newpipeInteractive  # CLI Interactive
 ```
 
@@ -520,7 +522,7 @@ plantuml-gradle/
 === Avant (build.gradle.kts monolithique)
 ```kotlin
 // 80+ lignes, mélange config et logique
-tasks.register("downloadMusic") {
+tasks.register("collectMusic") {
     doLast {
         val url = project.findProperty("url") as String?  // Pas type safety
         // 50 lignes de code procédural, pas réutilisable, difficile à tester
@@ -540,7 +542,7 @@ tasks.register("downloadMusic") {
 1. Gradle démarre
 2. Compile buildSrc/ EN PREMIER (dépendances, classes Kotlin, plugin)
 3. Applique build.gradle.kts (charge plugin, enregistre tâches)
-4. Exécution : ./gradlew downloadMusic --url="..."
+4. Exécution : ./gradlew collectMusic --url="..."
 ```
 
 === Extensions Possibles
@@ -608,7 +610,7 @@ open class YouTubeExtension {
 
 // Dans DownloaderPlugin.kt
 val ext = project.extensions.create("youtubeDownloader", YouTubeExtension::class.java)
-project.tasks.register("downloadMusic", DownloadMusicTask::class.java) {
+project.tasks.register("collectMusic", DownloadMusicTask::class.java) {
     outputPath = ext.defaultOutput
 }
 ```
@@ -643,7 +645,7 @@ private fun isValidYouTubeUrl(url: String): Boolean =
     Regex("""^https?://(www\.)?(youtube\.com/watch\?v=|youtu\.be/)[a-zA-Z0-9_\-]{11}.*""")
         .matches(url)
 
-// Dans download()
+// Dans collect()
 if (!isValidYouTubeUrl(url))
     throw GradleException("URL YouTube invalide : $url")
 ```

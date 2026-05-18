@@ -15,7 +15,7 @@ open class InteractiveCliTask : DefaultTask() {
     private val scanner = Scanner(System.`in`)
 
     init {
-        group = NewpipeManager.NEWPIPE_GROUP
+        group = "info"
         description = "Interactive CLI for NewPipe plugin operations"
     }
 
@@ -111,8 +111,8 @@ open class InteractiveCliTask : DefaultTask() {
 
         when (choice) {
             "1" -> {
-                println("\n📥 Exécution de: ./gradlew downloadMusic")
-                executeGradleTask("downloadMusic")
+                println("\n📥 Exécution de: ./gradlew collectMusic")
+                executeGradleTask("collectMusic")
             }
             "2" -> {
                 print("\n🎬 URL de la vidéo : ")
@@ -201,7 +201,7 @@ open class InteractiveCliTask : DefaultTask() {
         println("║  - ./gradlew buildSessions : Générer credentials         ║")
         println("║  - ./gradlew authSessions : Authentifier comptes         ║")
         println("║  - ./gradlew sessionStatus : État des sessions           ║")
-        println("║  - ./gradlew downloadMusic : Télécharger playlists       ║")
+        println("║  - ./gradlew collectMusic : Télécharger playlists        ║")
         println("║                                                          ║")
         println("╚══════════════════════════════════════════════════════════╝")
         println()

@@ -1,6 +1,6 @@
 package com.cheroliv.newpipe
 
-import com.cheroliv.newpipe.NewpipeManager.NEWPIPE_GROUP
+import com.cheroliv.newpipe.NewpipeManager
 import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
@@ -83,7 +83,6 @@ open class DownloadMusicTask : DefaultTask() {
     var sessionsPath: String = ""
 
     init {
-        group = NEWPIPE_GROUP
         description = "Downloads all tunes and playlists from the YAML config and converts them to MP3"
     }
 

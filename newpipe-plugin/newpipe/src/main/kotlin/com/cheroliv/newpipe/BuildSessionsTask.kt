@@ -1,6 +1,5 @@
 package com.cheroliv.newpipe
 
-import com.cheroliv.newpipe.NewpipeManager.NEWPIPE_GROUP
 import com.cheroliv.newpipe.NewpipeManager.yamlMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.gradle.api.DefaultTask
@@ -36,7 +35,7 @@ open class BuildSessionsTask : DefaultTask() {
     var sessionsPath: String = ""
 
     init {
-        group       = NEWPIPE_GROUP
+        group       = "build"
         description = "Builds sessions.yml from JSON files in client_secrets/"
     }
 

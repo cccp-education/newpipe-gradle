@@ -193,10 +193,10 @@ La rotation crée `backup/Y20XX-sessions-X-Y/` avec copie intégrale de INDEX + 
 ./gradlew sessionStatus
 ```
 
-=== Téléchargement
+=== Collecte
 ```bash
-./gradlew downloadMusic --url="VIDEO_ID"
-./gradlew downloadMusic
+./gradlew collectMusic --url="VIDEO_ID"
+./gradlew collectMusic
 ./gradlew newpipeInteractive
 ```
 
@@ -210,7 +210,7 @@ La rotation crée `backup/Y20XX-sessions-X-Y/` avec copie intégrale de INDEX + 
 
 *Flux* :
 ```
-buildSessions → authSessions (Device Flow) → sessions.yml enrichi → downloadMusic
+buildSessions → authSessions (Device Flow) → sessions.yml enrichi → collectMusic
 ```
 
 *Sécurité* :

@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.publish)
 }
 
-group = "com.cheroliv.newpipe"
+group = "education.cccp"
 version = libs.plugins.newpipe.get().version
 
 // Utilisation de la toolchain comme dans ton modèle
@@ -68,7 +68,7 @@ gradlePlugin {
     testSourceSets(functionalTest)
     plugins {
         create("newpipePlugin") {
-            id = "com.cheroliv.newpipe"
+            id = "education.cccp.newpipe"
             implementationClass = "com.cheroliv.newpipe.DownloaderPlugin"
             displayName = "NewPipe Downloader Plugin"
             description = "Gradle plugin for downloading music from YouTube and converting to MP3."
@@ -109,9 +109,9 @@ publishing {
                     }
                     developers {
                         developer {
-                            id.set("cheroliv")
-                            name.set("cheroliv")
-                            email.set("cheroliv.developer@gmail.com")
+                            id.set("cccp-education")
+                            name.set("CCCP Education")
+                            email.set("cccp.education@gmail.com")
                         }
                     }
                     scm {

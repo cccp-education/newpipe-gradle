@@ -3,7 +3,6 @@
 package com.cheroliv.newpipe
 
 import com.cheroliv.newpipe.NewpipeManager.CONFIG_PATH_EXCEPTION_MESSAGE
-import com.cheroliv.newpipe.NewpipeManager.NEWPIPE_GROUP
 import com.cheroliv.newpipe.NewpipeManager.registerDownloadTask
 import com.cheroliv.newpipe.NewpipeManager.yamlMapper
 import com.fasterxml.jackson.module.kotlin.readValue
@@ -15,7 +14,7 @@ class DownloaderPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         val newpipeExtension = project.extensions.create(
-            NEWPIPE_GROUP,
+            "newpipe",
             NewpipeExtension::class.java
         )
         

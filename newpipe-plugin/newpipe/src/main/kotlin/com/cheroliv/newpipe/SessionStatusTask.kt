@@ -1,5 +1,6 @@
 package com.cheroliv.newpipe
 
+import com.cheroliv.newpipe.NewpipeManager
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
@@ -37,7 +38,7 @@ open class SessionStatusTask : DefaultTask() {
     var sessionsPath: String = ""
 
     init {
-        group = NewpipeManager.NEWPIPE_GROUP
+        group = "info"
         description = "Displays the current state of all YouTube sessions"
     }
 

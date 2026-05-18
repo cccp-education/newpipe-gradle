@@ -1021,7 +1021,7 @@ artistes:
 
 *Sous-menus* :
 - Sessions : Générer client_secrets (1) / Authentifier comptes (2) / Retour (3)
-- Téléchargement : Toutes playlists downloadMusic (1) / Vidéo spécifique (2) / Session spécifique (3) / Retour (4)
+- Téléchargement : Toutes playlists collectMusic (1) / Vidéo spécifique (2) / Session spécifique (3) / Retour (4)
 
 *Fichiers à créer* :
 - `InteractiveCliTask.kt` : Tâche principale interactive
