@@ -9,6 +9,7 @@ Mis à jour à chaque fin de session.
 [cols="1,2,2,4,2", options="header"]
 |===
 | N | Date | Type | Sujet | Score
+| 002 | 2026-06-02 | governance | Borough-isation VESTIGE — newpipe-gradle devient Nashville 🎶 | 8/10
 | 001 | 2026-05-02 | chore | Extraction documentation parent (.md → .adoc), enrichissement COLD, nettoyage ../ | 9/10
 | 000 | 2026-05-02 | chore | Bootstrap gouvernance agent (Eager/Lazy, Hot/Warm/Cold, encyclopedie) | 8/10
 |===

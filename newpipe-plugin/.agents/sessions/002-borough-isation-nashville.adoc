@@ -1,0 +1,69 @@
+= Session 002 — Borough-isation VESTIGE : newpipe-gradle devient Nashville 🎶 (governance)
+:toc: left
+:sectnums:
+:icons: font
+
+== Contexte
+
+*Projet* : newpipe-gradle/newpipe-plugin
+*Session précédente* : 001 — Extraction documentation parent (2026-05-02)
+*État entrée* : Plugin stable (Auth 42/42 points), build OK, 80+ tests unitaires. Abandonné depuis avril 2026. Vestige dans foundry/public/.
+
+Mission : marquer officiellement le statut VESTIGE du borough Nashville. Aucune modification de code source.
+
+== État Initial
+
+*Build* : Non vérifié (session purement gouvernance)
+*Tests* : Non exécutés
+*Gouvernance* : EAGER 559 lignes, LAZY ~2000 lignes, COLD encyclopédies complètes
+
+== Actions
+
+=== Marqueur VESTIGE officiel
+
+. Attribué l'identité borough : *Nashville 🎶* (VESTIGE — YouTube→MP3 via NewPipeExtractor)
+. Statut confirmé dans la taxonomie workspace (AGENTS.adoc racine)
+. Aucun code source modifié — seuls les fichiers `.agents/` impactés
+
+=== Session report
+
+. Créé ce fichier `002-borough-isation-nashville.adoc`
+. Mise à jour `INDEX.adoc` (session 003 à venir)
+. Mise à jour `SESSIONS_HISTORY.adoc`
+
+== État Final
+
+*EPICs* :
+- Auth : 100% (42/42) ✅
+- LLM : En attente 🔴 (abandonné)
+- Build : En attente 🟡 (abandonné)
+- Test : En attente 🟠 (abandonné)
+
+*Décision* : Projet dormant. Probablement jamais réactivé. Conserver le code source intact (propriété intellectuelle, pattern NewPipeExtractor = référence technique) mais arrêter toute velléité de développement.
+
+== Build & Tests Finaux
+
+*Build* : Non vérifié (session purement gouvernance)
+*Tests* : Non exécutés
+
+== Prochaine Session
+
+*Priorité* : 🔴 003 — probablement jamais ouverte.
+
+Si néanmoins ouverte :
+. `./gradlew :newpipe:clean :newpipe:build` — vérifier compilation post-rot
+. `./gradlew :newpipe:test` — valider 80+ tests toujours verts
+. Mise à jour dépendances si nécessaire
+
+== Métriques de Session
+
+|===
+| Métrique | Valeur
+| Durée | ~10 minutes (création rapport + MAJ INDEX/HISTORY)
+| Fichiers créés | 1 (archive session)
+| Fichiers modifiés | 2 (INDEX.adoc, SESSIONS_HISTORY.adoc)
+| Lignes gouvernance ajoutées | ~80
+| Score auto-évalué | 8/10
+|===
+
+*Note* : Score 8/10 car tâche simple de gouvernance (borough-isation = étiquetage VESTIGE), exécutée proprement. Aucune régression.
