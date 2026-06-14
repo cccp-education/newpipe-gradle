@@ -18,10 +18,15 @@
 
 *Nom* : `newpipe-plugin`
 *Package* : `com.cheroliv.newpipe`
-*Stack* : Kotlin 2.3.20, Gradle 9.4.1, LangChain4j 1.12.2, NewPipeExtractor v0.24.0
+*Stack* : Kotlin 2.3.20, Gradle 9.5.1, NewPipeExtractor v0.26.3
 *Modèle IA* : deepseek-v4-pro (via Ollama cloud, CSA+HCA, 1M contexte)
 *Documentation* : AsciiDoc
 *Racine de travail* : `newpipe-plugin/`
+*Version* : 0.0.1
+*Plugin ID* : `education.cccp.newpipe`
+*GroupId* : `education.cccp`
+*Publication cible* : Gradle Plugin Portal (compte `cccp-education`)
+*Particularité* : dépendance JitPack (`com.github.TeamNewPipe:NewPipeExtractor:v0.26.3`) — refusée par Maven Central, acceptée par Plugin Portal
 
 [CAUTION]
 ====
@@ -108,27 +113,46 @@ newpipe-plugin/
 ├── README_fr.adoc
 ├── newpipe/
 │   ├── build.gradle.kts
-│   └── src/main/kotlin/com/cheroliv/newpipe/
-│       ├── DownloaderPlugin.kt
-│       ├── NewpipeManager.kt
-│       ├── YouTubeDownloader.kt
-│       ├── AuthSessionTask.kt          ← Auth Google OAuth2
-│       ├── BuildSessionsTask.kt        ← Construction sessions
-│       ├── SessionManager.kt           ← Round-Robin + refresh
-│       ├── DownloadMusicTask.kt        ← Téléchargement
-│       ├── Mp3Converter.kt             ← Conversion MP3
-│       ├── Models.kt                   ← Data classes
-│       ├── TokenRefresher.kt           ← Refresh OAuth2
-│       ├── AuthErrorHandler.kt         ← Erreurs auth
-│       ├── AgeVerificationHandler.kt   ← Vidéos 18+
-│       ├── SessionStatusTask.kt        ← Monitoring
-│       ├── SessionMonitor.kt
-│       ├── PrivatePlaylistHandler.kt   ← Playlists privées
-│       ├── InteractiveCli.kt           ← CLI interactive
-│       └── ai/                         ← Module IA
-│           ├── LlmClient.kt
-│           ├── SessionGeneratorAgent.kt
-│           └── MaintenanceAgent.kt
+│   └── src/
+│       ├── main/kotlin/com/cheroliv/newpipe/
+│       │   ├── DownloaderPlugin.kt
+│       │   ├── NewpipeManager.kt
+│       │   ├── NewpipeExtension.kt
+│       │   ├── YouTubeDownloader.kt
+│       │   ├── DownloaderImpl.kt
+│       │   ├── AuthSessionTask.kt          ← Auth Google OAuth2
+│       │   ├── BuildSessionsTask.kt        ← Construction sessions
+│       │   ├── SessionManager.kt           ← Round-Robin + refresh
+│       │   ├── DownloadMusicTask.kt        ← Téléchargement
+│       │   ├── Mp3Converter.kt             ← Conversion MP3
+│       │   ├── Models.kt                   ← Data classes
+│       │   ├── TokenRefresher.kt           ← Refresh OAuth2
+│       │   ├── AuthErrorHandler.kt         ← Erreurs auth
+│       │   ├── AgeVerificationHandler.kt   ← Vidéos 18+
+│       │   ├── AgeRestrictedVideoException.kt
+│       │   ├── SessionStatusTask.kt        ← Monitoring
+│       │   ├── SessionMonitor.kt
+│       │   ├── PrivatePlaylistHandler.kt   ← Playlists privées
+│       │   ├── PrivatePlaylistException.kt
+│       │   ├── InteractiveCliTask.kt       ← CLI interactive
+│       │   ├── FakeAudioConverter.kt       ← Mock test
+│       │   ├── FakeVideoInfoProvider.kt    ← Mock test
+│       │   └── VideoServices.kt
+│       ├── test/kotlin/com/cheroliv/newpipe/
+│       │   ├── AgeVerificationHandlerTest.kt
+│       │   ├── AuthErrorHandlerTest.kt
+│       │   ├── NewpipePluginTest.kt
+│       │   ├── PrivatePlaylistHandlerTest.kt
+│       │   └── SessionManagerTest.kt
+│       ├── test/scenarios/com/cheroliv/newpipe/scenarios/
+│       │   ├── AuthSessionSteps.kt
+│       │   ├── CucumberTestRunner.kt
+│       │   ├── MinimalSteps.kt
+│       │   └── NewpipeWorld.kt
+│       └── functionalTest/kotlin/com/cheroliv/newpipe/
+│           ├── tools.kt
+│           ├── YouTubeAuthIntegrationTest.kt
+│           └── YouTubeIntegrationTest.kt
 └── .agents/
     ├── INDEX.adoc
     ├── SESSIONS_HISTORY.adoc
@@ -236,14 +260,28 @@ buildSessions → authSessions (Device Flow) → sessions.yml enrichi → collec
 
 *Total* : 42/42 points (100%) ✅
 
-.EPIC : Intégration LLM & IA
+.EPIC : Publication Gradle Plugin Portal — cheroliv → cccp-education
+|===
+| US | Titre | Points | Statut
+| PUB-1 | Récupérer credentials cccp-education sur plugins.gradle.org | 2 | ✅ FAIT
+| PUB-2 | Migrer build.gradle.kts (Sonatype → pluginPublish 2.1.1) | 3 | ✅ FAIT
+| PUB-3 | Déclarer compatibility features (configurationCache = false) | 1 | ✅ FAIT
+| PUB-4 | Mettre à jour vcsUrl → github.com/cccp-education/newpipe-gradle | 1 | ✅ FAIT
+| PUB-5 | Publier sur Plugin Portal (`./gradlew :newpipe:publishPlugins`) | 3 | ⏳ À FAIRE
+|===
+
+*Total* : 8/10 points (80%)
+*Particularité NewPipe* : dépendance JitPack (`com.github.TeamNewPipe:NewPipeExtractor:v0.26.3`) refusée par Maven Central mais acceptée par Gradle Plugin Portal.
+
+.EPIC : Intégration LLM & IA (Futur)
 |===
 | Composant | Statut
-| LlmClient | ✅ mp3-organizer → à migrer
+| LlmClient | ⏳ À créer (ex-nihilo, pas de mp3-organizer)
 | SessionGeneratorAgent | ⏳ À créer
-| MaintenanceAgent | ✅ mp3-organizer → à migrer
-| Version Catalog | ⏳ À créer
+| MaintenanceAgent | ⏳ À créer
 |===
+
+*Note* : le module `ai/` et le projet `mp3-organizer` n'existent pas dans le workspace actuel. Cet EPIC est une création from scratch, pas une migration.
 
 Documentation intégrée dans `.agents/` — voir REFERENCES ci-dessous. Historique complet des sessions archivé dans `.agents/encyclopedies/LAZY_EAGER_ENCYCLOPEDIE.adoc` (COLD).
 

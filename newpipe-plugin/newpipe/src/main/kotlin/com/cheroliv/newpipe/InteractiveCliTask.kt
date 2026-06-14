@@ -1,7 +1,10 @@
 package com.cheroliv.newpipe
 
+import com.cheroliv.newpipe.NewpipeManager.yamlMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
+import org.gradle.work.DisableCachingByDefault
 import java.io.File
 import java.util.Scanner
 
@@ -10,6 +13,7 @@ import java.util.Scanner
  *
  * Provides a menu-driven interface for common plugin operations.
  */
+@DisableCachingByDefault(because = "Interactive CLI is always dynamic and should never be cached")
 open class InteractiveCliTask : DefaultTask() {
 
     private val scanner = Scanner(System.`in`)
@@ -119,8 +123,7 @@ open class InteractiveCliTask : DefaultTask() {
                 val url = readLine()?.trim()
                 if (!url.isNullOrBlank()) {
                     println("\n📥 Téléchargement de: $url")
-                    // TODO: Implémenter le téléchargement d'une vidéo unique
-                    println("⚠️  Fonctionnalité en cours de développement")
+                    executeGradleTask("collectMusic", "--url=$url")
                 } else {
                     println("\n❌ URL invalide.")
                 }
@@ -209,11 +212,12 @@ open class InteractiveCliTask : DefaultTask() {
         readLine()
     }
 
-    private fun executeGradleTask(taskName: String) {
+    private fun executeGradleTask(taskName: String, vararg args: String) {
         try {
             val projectDir = project.projectDir
             val gradleWrapper = if (isWindows()) "gradlew.bat" else "gradlew"
-            val command = listOf("$projectDir/$gradleWrapper", taskName)
+            val command = mutableListOf("$projectDir/$gradleWrapper", taskName)
+            command.addAll(args)
 
             println("\n⏳ Exécution de la tâche $taskName...")
             println("   (Cette tâche peut prendre quelques secondes)")

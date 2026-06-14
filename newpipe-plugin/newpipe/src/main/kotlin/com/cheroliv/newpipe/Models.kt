@@ -11,10 +11,7 @@ data class Selection(
         val name: String,
         val tunes: List<String> = emptyList(),
         val playlists: List<PlaylistEntry> = emptyList()
-    ) {
-        @Deprecated("Use playlists with PlaylistEntry instead", level = DeprecationLevel.HIDDEN)
-        fun getPlaylistUrls(): List<String> = playlists.map { it.url }
-    }
+    )
     
     data class PlaylistEntry(
         val url: String,

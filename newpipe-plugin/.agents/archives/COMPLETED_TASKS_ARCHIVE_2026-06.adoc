@@ -1,0 +1,57 @@
+= COMPLETED_TASKS_ARCHIVE — Juin 2026
+:icons: font
+
+[abstract]
+Tâches terminées archivées par mois.
+*LAZY* — Consulté sur demande.
+
+== Session 003
+
+*Date* : 2026-06-14
+*Type* : publication
+*Sujet* : Migration Plugin Portal cheroliv→cccp-education + fix build + upgrade NewPipeExtractor v0.26.3 + consolidation produit
+
+*Réalisé* :
+
+=== Fix Build (Gradle 9.5.1)
+- `@DisableCachingByDefault` sur 5 tâches (SessionStatusTask, AuthSessionTask, BuildSessionsTask, DownloadMusicTask, InteractiveCliTask)
+
+=== Upgrade NewPipeExtractor
+- v0.24.0 → v0.26.3 (latest tag, 9 juin 2026)
+
+=== Migration Plugin Portal
+- `plugin-publish` 1.3.1 → 2.1.1
+- Suppression Sonatype `repositories`
+- `compatibility { features { configurationCache = false } }`
+- `vcsUrl` → `https://github.com/cccp-education/newpipe-gradle.git`
+
+=== Consolidation Code
+- `build.gradle.kts` : version catalog
+- `InteractiveCliTask.kt` : 2 TODO implémentés
+- `Models.kt` : suppression `@Deprecated getPlaylistUrls()`
+- Version : 0.0.6 → 0.0.1
+
+=== Synchronisation Backlog
+- `AGENT.adoc` : suppression phantom `ai/`, `mp3-organizer`, `buildSrc`
+- EPIC Portal : PUB-1→4 FAIT
+- EPIC LLM : reformulé « création from scratch »
+- EPIC Build : supprimé
+
+=== Consolidation Produit
+- `README.adoc` + `README_fr.adoc` : version 0.0.1, plugin ID, badges, publishing Plugin Portal
+- `build.gradle.kts` : displayName/description/tags enrichis
+
+*Fichiers modifiés* : 14 (13 modifiés + 1 créé PROMPT_REPRISE.adoc)
+*Build* : ✅ SUCCESSFUL
+*Tests* : ✅ passants
+
+== Session 002
+
+*Date* : 2026-06-02
+*Type* : governance
+*Sujet* : Borough-isation VESTIGE — newpipe-gradle devient Nashville 🎶
+
+*Réalisé* :
+- Intégration de newpipe-gradle dans le portefeuille des 25 boroughs
+- Statut VESTIGE documenté (abandonné depuis avril 2026)
+- Mise à jour AGENTS.adoc racine workspace

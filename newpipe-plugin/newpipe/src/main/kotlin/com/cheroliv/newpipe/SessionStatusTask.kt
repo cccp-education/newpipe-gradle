@@ -3,6 +3,7 @@ package com.cheroliv.newpipe
 import com.cheroliv.newpipe.NewpipeManager
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.gradle.api.DefaultTask
+import org.gradle.work.DisableCachingByDefault
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
@@ -28,6 +29,7 @@ import java.time.format.DateTimeFormatter
  *   - Requests made today
  *   - Last used time
  */
+@DisableCachingByDefault(because = "Session status is always dynamic and should never be cached")
 open class SessionStatusTask : DefaultTask() {
 
     private val logger = LoggerFactory.getLogger(SessionStatusTask::class.java)

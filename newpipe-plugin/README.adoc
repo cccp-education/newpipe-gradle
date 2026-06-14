@@ -5,7 +5,7 @@
 :icons: font
 :source-highlighter: highlight.js
 :hardbreaks-option:
-:plugin_version: 0.0.4
+:plugin_version: 0.0.1
 
 ++++
 <p align="right">
@@ -15,12 +15,12 @@
 </p>
 ++++
 
-image:https://img.shields.io/badge/Kotlin-2.x-7F52FF?logo=kotlin[Kotlin]
-image:https://img.shields.io/badge/Gradle-8.x-02303A?logo=gradle[Gradle]
-image:https://img.shields.io/badge/JitPack-published-brightgreen[JitPack]
+image:https://img.shields.io/badge/Kotlin-2.3.20-7F52FF?logo=kotlin[Kotlin]
+image:https://img.shields.io/badge/Gradle-9.5.1-02303A?logo=gradle[Gradle]
+image:https://img.shields.io/badge/Plugin_Portal-cccp--education-blue[Plugin Portal]
 image:https://img.shields.io/badge/License-Apache%202.0-blue.svg[License]
 
-A Gradle plugin (`com.cheroliv.newpipe`) that downloads music from YouTube
+A Gradle plugin (`education.cccp.newpipe`) that downloads music from YouTube
 and converts it to MP3 — no Python dependency, pure JVM.
 
 == Value Proposition
@@ -41,19 +41,41 @@ newpipe-plugin/
     └── src/
         ├── main/kotlin/com/cheroliv/newpipe/
         │   ├── DownloaderPlugin.kt      Plugin entry point
-        │   ├── NewpipeExtension.kt      DSL extension (configPath, ffmpegDockerImage, forceDocker)
+        │   ├── NewpipeExtension.kt      DSL extension (configPath, ffmpegDockerImage, forceDocker, sessionsPath)
         │   ├── NewpipeManager.kt        Task registration + YAML parsing
-        │   ├── Models.kt                Selection / Artist data classes
+        │   ├── Models.kt                Selection / Artist / Session data classes
         │   ├── DownloadMusicTask.kt     Main Gradle task
-        │   ├── VideoServices.kt         VideoInfoProvider / AudioConverter interfaces
-        │   ├── VideoMetadata.kt         Data class decoupled from StreamInfo
+        │   ├── VideoServices.kt         VideoInfoProvider / AudioConverter interfaces + VideoMetadata
         │   ├── YouTubeDownloader.kt     Real implementation (NewPipe + OkHttp)
         │   ├── Mp3Converter.kt          Real implementation (FFmpeg / Docker + jaudiotagger)
-        │   └── DownloaderImpl.kt        NewPipe Downloader (OkHttp singleton)
-        └── test/kotlin/com/cheroliv/newpipe/
-            ├── FakeVideoInfoProvider.kt Network-free fake for tests
-            ├── FakeAudioConverter.kt    FFmpeg-free fake for tests
-            └── scenarios/              Cucumber tests (GradleTestKit)
+        │   ├── DownloaderImpl.kt        NewPipe Downloader (OkHttp singleton)
+        │   ├── AuthSessionTask.kt       OAuth2 Device Flow authentication
+        │   ├── BuildSessionsTask.kt     Session construction from client_secrets
+        │   ├── SessionManager.kt        Round-Robin session distribution + refresh
+        │   ├── TokenRefresher.kt        Silent OAuth2 token refresh
+        │   ├── AuthErrorHandler.kt      Auth error mapping + structured logging
+        │   ├── AgeVerificationHandler.kt Age-restricted video detection
+        │   ├── PrivatePlaylistHandler.kt Private playlist access
+        │   ├── SessionStatusTask.kt     Session monitoring dashboard
+        │   ├── SessionMonitor.kt        Session usage tracking
+        │   └── InteractiveCliTask.kt    Interactive CLI menu
+        ├── test/kotlin/com/cheroliv/newpipe/
+        │   ├── FakeVideoInfoProvider.kt Network-free fake for tests
+        │   ├── FakeAudioConverter.kt    FFmpeg-free fake for tests
+        │   ├── AgeVerificationHandlerTest.kt
+        │   ├── AuthErrorHandlerTest.kt
+        │   ├── NewpipePluginTest.kt
+        │   ├── PrivatePlaylistHandlerTest.kt
+        │   └── SessionManagerTest.kt
+        ├── test/scenarios/com/cheroliv/newpipe/scenarios/
+        │   ├── AuthSessionSteps.kt      Cucumber steps
+        │   ├── CucumberTestRunner.kt
+        │   ├── MinimalSteps.kt
+        │   └── NewpipeWorld.kt
+        └── functionalTest/kotlin/com/cheroliv/newpipe/
+            ├── tools.kt
+            ├── YouTubeAuthIntegrationTest.kt
+            └── YouTubeIntegrationTest.kt
 ----
 
 === Execution Flow
@@ -424,7 +446,7 @@ intentional, as upgrade logic depends on real stream data.
 | Dependency | Version | Role
 
 | `com.github.TeamNewPipe:NewPipeExtractor`
-| `dev` commit
+| v0.26.3
 | YouTube extraction (metadata + audio streams)
 
 | `com.squareup.okhttp3:okhttp`
@@ -446,11 +468,9 @@ intentional, as upgrade logic depends on real stream data.
 
 [NOTE]
 ====
-NewPipe Extractor is resolved via https://jitpack.io[JitPack]. The version
-points to a specific `dev` commit rather than a stable tag, to benefit from
-the latest YouTube anti-throttling fixes. See
-https://github.com/TeamNewPipe/NewPipeExtractor/commits/dev[the dev branch]
-for the latest commit hash.
+NewPipe Extractor is resolved via https://jitpack.io[JitPack] at version
+`v0.26.3` (latest stable tag, June 2026). This dependency mechanism is
+accepted by the Gradle Plugin Portal but not by Maven Central.
 ====
 
 == Build & Publishing
@@ -470,21 +490,27 @@ cd newpipe-plugin
 ./gradlew publishToMavenLocal
 ----
 
-=== Publish to Maven Central
+=== Publish to Gradle Plugin Portal
 
-Publishing requires Sonatype credentials and a GPG key configured in
-`~/.gradle/gradle.properties`:
-
-[source,properties]
-----
-ossrhUsername=<your-username>
-ossrhPassword=<your-password>
-----
+The plugin is published on the https://plugins.gradle.org[Gradle Plugin Portal]
+under the account `cccp-education`.
 
 [source,bash]
 ----
-./gradlew publish
+./gradlew publishPlugins
 ----
+
+Credentials are configured via `gradle.publish.key` and `gradle.publish.secret`
+in `~/.gradle/gradle.properties` or via `GRADLE_PUBLISH_KEY` /
+`GRADLE_PUBLISH_SECRET` environment variables.
+
+[NOTE]
+====
+This plugin cannot be published to Maven Central because it depends on
+NewPipe Extractor via JitPack (`com.github.TeamNewPipe:NewPipeExtractor`),
+which is rejected by Maven Central's coordinate policy. The Gradle Plugin
+Portal accepts JitPack dependencies.
+====
 
 == Known Issues
 

@@ -4,6 +4,7 @@ import com.cheroliv.newpipe.NewpipeManager.yamlMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
+import org.gradle.work.DisableCachingByDefault
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 import org.slf4j.LoggerFactory
@@ -22,6 +23,7 @@ import java.io.File
  * client_secret_5284-q61ql0tbjqt8.apps.googleusercontent.com.json
  * → 5284-q61ql0tbjqt8
  */
+@DisableCachingByDefault(because = "Session building scans filesystem and should never be cached")
 open class BuildSessionsTask : DefaultTask() {
 
     private val logger = LoggerFactory.getLogger(BuildSessionsTask::class.java)

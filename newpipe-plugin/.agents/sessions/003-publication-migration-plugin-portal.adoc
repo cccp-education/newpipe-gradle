@@ -1,0 +1,83 @@
+= Session 003 — Migration Plugin Portal cheroliv → cccp-education
+:date: 2026-06-14
+:type: publication
+:score: 9/10
+
+== Objectif
+
+Préparer la migration du plugin NewPipe depuis le compte `cheroliv` vers
+le compte `cccp-education` sur le Gradle Plugin Portal, fixer le build
+(Gradle 9.5.1), mettre à jour NewPipeExtractor (v0.24.0 → v0.26.3),
+consolider le produit (README, build.gradle.kts, backlog).
+
+== Réalisé
+
+=== Fix Build (Gradle 9.5.1)
+- `@DisableCachingByDefault` ajouté sur 5 tâches :
+  `SessionStatusTask`, `AuthSessionTask`, `BuildSessionsTask`,
+  `DownloadMusicTask`, `InteractiveCliTask`
+- Import corrigé : `org.gradle.work.DisableCachingByDefault`
+
+=== Upgrade NewPipeExtractor
+- v0.24.0 → v0.26.3 (latest tag, 9 juin 2026)
+- Fixes critiques : SABR enforcement workaround (#1508),
+  playlist items lockup (#1503), duration/live stream fixes
+
+=== Migration Plugin Portal
+- `plugin-publish` 1.3.1 → 2.1.1
+- Suppression bloc Sonatype `repositories`
+- Ajout `compatibility { features { configurationCache = false } }`
+- `vcsUrl` → `https://github.com/cccp-education/newpipe-gradle.git`
+- Credentials `cccp-education` trouvés en env vars
+
+=== Consolidation Code
+- `build.gradle.kts` : version catalog au lieu de versions hardcodées
+- `InteractiveCliTask.kt` : 2 TODO implémentés (download single video, `executeGradleTask` avec args)
+- `Models.kt` : suppression méthode `@Deprecated getPlaylistUrls()`
+- Version : 0.0.6 → 0.0.1
+
+=== Synchronisation Backlog
+- `AGENT.adoc` : suppression phantom `ai/`, `mp3-organizer`, `buildSrc`
+- EPIC Portal : PUB-1→4 ✅ FAIT, PUB-5 ⏳ (publication)
+- EPIC LLM : reformulé « création from scratch »
+- EPIC Build : supprimé (version catalog déjà en place)
+- `INDEX.adoc` : roadmap + session 003
+
+=== Consolidation Produit (Plugin Portal)
+- `README.adoc` + `README_fr.adoc` : version 0.0.1, plugin ID `education.cccp.newpipe`,
+  badges Plugin Portal, dépendance v0.26.3, section publishing Plugin Portal
+- `build.gradle.kts` : displayName/description/tags enrichis pour page produit
+
+== Fichiers Modifiés
+
+[cols="2,3", options="header"]
+|===
+| Fichier | Action
+| `newpipe/src/.../SessionStatusTask.kt` | +@DisableCachingByDefault
+| `newpipe/src/.../AuthSessionTask.kt` | +@DisableCachingByDefault
+| `newpipe/src/.../BuildSessionsTask.kt` | +@DisableCachingByDefault
+| `newpipe/src/.../DownloadMusicTask.kt` | +@DisableCachingByDefault
+| `newpipe/src/.../InteractiveCliTask.kt` | +@DisableCachingByDefault + implémentation 2 TODO
+| `newpipe/src/.../Models.kt` | Suppression getPlaylistUrls() dépréciée
+| `newpipe/build.gradle.kts` | Version catalog, pluginPublish 2.1.1, compatibility, suppression Sonatype, vcsUrl, displayName/description/tags
+| `gradle/libs.versions.toml` (plugin) | newpipe 0.0.1, newpipe-extractor v0.26.3, plugin-publish 2.1.1
+| `gradle/libs.versions.toml` (root) | newpipe 0.0.1
+| `AGENT.adoc` | Stack corrigé, structure réelle, backlog synchronisé
+| `INDEX.adoc` | Roadmap + session 003, suppression EPIC Build
+| `PROMPT_REPRISE.adoc` | Créé (mission session 003)
+| `README.adoc` | Version 0.0.1, plugin ID, badges, publishing Plugin Portal
+| `README_fr.adoc` | Idem
+|===
+
+== État Final
+
+- Build : ✅ SUCCESSFUL
+- Tests : ✅ passants
+- Version : 0.0.1
+- NewPipeExtractor : v0.26.3
+- `publishPlugins` : prêt (credentials en env vars)
+
+== Prochaine Session (004)
+
+`./gradlew :newpipe:publishPlugins` — publication sur le Gradle Plugin Portal
+sous le compte `cccp-education`.

@@ -1,0 +1,37 @@
+= PROMPT_REPRISE — Session 004
+:date: 2026-06-14
+:session: 004
+:type: publication
+:title: Publication Plugin Portal cccp-education
+:status: pending
+:previous_session: 003 (Migration Plugin Portal + consolidation)
+
+== Mission
+
+Publier le plugin NewPipe v0.0.1 sur le Gradle Plugin Portal
+sous le compte `cccp-education`.
+
+== Contexte
+
+- Build : ✅ SUCCESSFUL
+- Version : 0.0.1
+- Plugin ID : `education.cccp.newpipe`
+- GroupId : `education.cccp`
+- NewPipeExtractor : v0.26.3 (via JitPack)
+- `plugin-publish` : 2.1.1 configuré
+- `compatibility { features { configurationCache = false } }` déclaré
+- `vcsUrl` : `https://github.com/cccp-education/newpipe-gradle.git`
+- Credentials : `GRADLE_PUBLISH_KEY` + `GRADLE_PUBLISH_SECRET` en env vars
+
+== À Faire
+
+. `./gradlew :newpipe:publishPlugins`
+. Vérifier l'approbation sur https://plugins.gradle.org/u/cccp-education
+. Mettre à jour EPIC Portal → 100% (10/10)
+
+== Commandes
+
+```bash
+./gradlew :newpipe:clean :newpipe:build
+./gradlew :newpipe:publishPlugins
+```

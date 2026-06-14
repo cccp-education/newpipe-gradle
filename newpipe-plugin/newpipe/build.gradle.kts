@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.publish)
 }
 
+import org.gradle.plugin.compatibility.compatibility
+
 group = "education.cccp"
 version = libs.plugins.newpipe.get().version
 
@@ -40,23 +42,15 @@ configurations {
 }
 
 dependencies {
-    // Core (inspiré de ton modèle)
     implementation(kotlin("stdlib-jdk8"))
     implementation(gradleApi())
 
-    // Dépendances spécifiques NewPipe
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    val jacksonVersion = "2.15.2"
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion")
-    implementation("com.squareup.okhttp3:okhttp:4.11.0")
-    implementation("com.github.TeamNewPipe:NewPipeExtractor:v0.24.0")
-    implementation("net.jthink:jaudiotagger:3.0.1")
+    implementation(libs.bundles.newpipe)
+    implementation(libs.bundles.coroutines)
 
-    // Tests (comme dans ton modèle)
     testImplementation(kotlin("test-junit5"))
-    testImplementation("org.assertj:assertj-core:3.24.2")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation(libs.assertj.core)
+    testRuntimeOnly(libs.junit.platform.launcher)
 }
 
 // Correction du doublon logback-test.xml
@@ -70,13 +64,18 @@ gradlePlugin {
         create("newpipePlugin") {
             id = "education.cccp.newpipe"
             implementationClass = "com.cheroliv.newpipe.DownloaderPlugin"
-            displayName = "NewPipe Downloader Plugin"
-            description = "Gradle plugin for downloading music from YouTube and converting to MP3."
-            tags.set(listOf("newpipe", "downloader", "m4a", "ffmpeg", "docker", "mp3", "kotlin-dsl", "youtube"))
+            displayName = "NewPipe YouTube Music Downloader"
+            description = "Downloads music from YouTube and converts to MP3 with ID3 tags. Supports OAuth2 authentication for member-only videos, age-restricted content, and private playlists. Pure JVM — no Python/yt-dlp dependency. Uses NewPipeExtractor + FFmpeg (local or Docker)."
+            tags.set(listOf("youtube", "music", "mp3", "downloader", "newpipe", "ffmpeg", "docker", "oauth2", "kotlin-dsl", "audio"))
+            compatibility {
+                features {
+                    configurationCache = false
+                }
+            }
         }
     }
     website = "https://cheroliv.com"
-    vcsUrl = "https://github.com/cheroliv/newpipe-gradle.git"
+    vcsUrl = "https://github.com/cccp-education/newpipe-gradle.git"
 }
 
 val functionalTestTask = tasks.register<Test>("functionalTest") {
@@ -119,38 +118,7 @@ publishing {
                         developerConnection.set(gradlePlugin.vcsUrl.get())
                         url.set(gradlePlugin.vcsUrl.get())
                     }
-                    // RELOCATION : prépare la migration du groupId éducation.cccp →
-                    // <futur-domaine>. Activer avec -Prem relocationGroup="io.github.cccp-education"
-                    // Effet : injecte <distributionManagement><relocation><groupId>...</groupId></relocation>
-                    // dans le POM publié. Les consommateurs existants seront redirigés automatiquement
-                    // vers le nouveau groupId lors de la prochaine màj de dépendance.
-                    project.findProperty("relocationGroup")?.let { targetGroup ->
-                        withXml {
-                            val pom = asElement()
-                            val doc = pom.ownerDocument
-                            val distMgmt = doc.createElement("distributionManagement")
-                            val relocation = doc.createElement("relocation")
-                            relocation.appendChild(doc.createElement("groupId")).also { it.textContent = targetGroup.toString() }
-                            relocation.appendChild(doc.createElement("artifactId")).also { it.textContent = project.name }
-                            distMgmt.appendChild(relocation)
-                            pom.appendChild(distMgmt)
-                        }
-                    }
                 }
-            }
-        }
-    }
-    repositories {
-        maven {
-            name = "sonatype"
-            url = if (version.toString().endsWith("-SNAPSHOT")) {
-                uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-            } else {
-                uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-            }
-            credentials {
-                username = project.findProperty("ossrhUsername") as? String
-                password = project.findProperty("ossrhPassword") as? String
             }
         }
     }

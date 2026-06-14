@@ -6,6 +6,7 @@ import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
+import org.gradle.work.DisableCachingByDefault
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
@@ -31,6 +32,7 @@ import java.io.File
  * CLI override (single video):
  *   gradle download --url=<youtube-url> [--output=<output-dir>]
  */
+@DisableCachingByDefault(because = "Music download is always dynamic and should never be cached")
 open class DownloadMusicTask : DefaultTask() {
 
     private val logger = LoggerFactory.getLogger(DownloadMusicTask::class.java)

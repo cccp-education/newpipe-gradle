@@ -9,6 +9,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
+import org.gradle.work.DisableCachingByDefault
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 import org.slf4j.LoggerFactory
@@ -25,6 +26,7 @@ import java.time.Instant
  * accessToken and accessTokenExpiry are NOT written to disk —
  * they are obtained at runtime by [DownloadMusicTask] via silent refresh.
  */
+@DisableCachingByDefault(because = "OAuth2 Device Flow is interactive and should never be cached")
 open class AuthSessionTask : DefaultTask() {
 
     private val logger = LoggerFactory.getLogger(AuthSessionTask::class.java)
