@@ -13,7 +13,7 @@ private val logger = KotlinLogging.logger {}
  * Aligné sur l'API plantuml-gradle (langchain4j 1.12.2)
  */
 class LlmClient(
-    private val baseUrl: String = "http://localhost:11434",
+    private val baseUrl: String = "http://localhost:11440",
     private val modelName: String = "gemma4:e4b-it-q4_K_M",
     private val temperature: Double = 0.7,
     private val timeoutSeconds: Long = 120
