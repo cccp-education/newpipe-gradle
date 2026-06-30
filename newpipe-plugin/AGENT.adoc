@@ -19,7 +19,7 @@
 *Nom* : `newpipe-plugin`
 *Package* : `com.cheroliv.newpipe`
 *Stack* : Kotlin 2.3.20, Gradle 9.5.1, NewPipeExtractor v0.26.3
-*Modèle IA* : deepseek-v4-pro (via Ollama cloud, CSA+HCA, 1M contexte)
+*Modèle IA* : gpt-oss:120b-cloud (via Ollama cloud, CSA+HCA, 1M contexte)
 *Documentation* : AsciiDoc
 *Racine de travail* : `newpipe-plugin/`
 *Version* : 0.0.1
@@ -337,4 +337,4 @@ Checklist de confirmation :
 - 0108 — Stratégie Eager/Lazy : https://cheroliv.com/blog/2026/04/27/gouvernance-agent-opencode-eager-lazy.html
 - 0110 — Hot/Warm/Cold Backup : https://cheroliv.com/blog/2026/04/30/backup-contexte-agent-hot-warm-cold.html
 - 0111 — Audit & Split Encyclopédique : https://cheroliv.com/blog/2026/04/30/audit-contexte-agent-encyclopedie.html
-- 0112 — Comparaison LLMs Long Contexte : https://cheroliv.com/blog/2026/05/02/comparaison-deepseek-v4-pro-kimi-glml-long-contexte-gradle.html
+- 0112 — Comparaison LLMs Long Contexte : https://cheroliv.com/blog/2026/05/02/comparaison-gpt-oss:120b-cloud-kimi-glml-long-contexte-gradle.html

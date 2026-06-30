@@ -695,7 +695,7 @@ IA / LLM:
   - LangChain4j 1.12.2
   - Ollama (local, http://localhost:11434)
   - Modèle local: gemma4:e4b-it-q4_K_M (9.6GB, multimodal)
-  - Modèle agent: deepseek-v4-pro (via Ollama cloud, CSA+HCA, 1M contexte)
+  - Modèle agent: gpt-oss:120b-cloud (via Ollama cloud, CSA+HCA, 1M contexte)
 
 YouTube:
   - NewPipeExtractor v0.24.0
