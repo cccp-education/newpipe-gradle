@@ -1,8 +1,8 @@
 import org.gradle.api.tasks.JavaExec
 
 plugins {
-    kotlin("jvm") version "2.3.20"
-    kotlin("plugin.serialization") version "2.3.20"
+    kotlin("jvm") version "2.4.10"
+    kotlin("plugin.serialization") version "2.4.10"
     application
 }
 
@@ -33,7 +33,7 @@ dependencies {
 }
 
 kotlin {
-    jvmToolchain(24)
+    jvmToolchain(25)
 }
 
 application {
