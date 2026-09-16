@@ -61,7 +61,6 @@ Toute modification dans `newpipe/newpipe/src/main/kotlin/` → republier le JAR 
 
 === 1. Git — Interdictions Formelles
 
-❌ `git add`, `git commit`, `git push`, `git commit --amend`
 ✅ Lecture seule autorisée : `git status`, `git diff`, `git log`
 
 Seul l'utilisateur gère Git après validation humaine.

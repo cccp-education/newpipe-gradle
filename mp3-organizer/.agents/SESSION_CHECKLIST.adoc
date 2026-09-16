@@ -10,7 +10,7 @@
 
 == Pendant la session
 
-. [ ] AUCUN commit sans permission
+. [ ] Git autorisé (décision 2026-09-17) — zéro secret commité
 . [ ] backup avant modif fichiers config
 . [ ] PAS de tests en fin de session sans permission
 

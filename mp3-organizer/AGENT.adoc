@@ -48,9 +48,8 @@ Ce projet vit dans `foundry/public/newpipe-gradle/mp3-organizer/` → *cercle 4 
 
 === Git
 
-**INTERDICTION FORMELLE** de commit/push/merge sans permission explicite de l'utilisateur.
+* Commit/push/merge autorisés (décision pilote 2026-09-17 — suppression de l'interdiction formelle). Ne JAMAIS commiter de secret.
 Autorisé (lecture seule) : `git status`, `git diff`, `git log`, `git show`
-Interdit (sauf ordre) : `git add`, `git commit`, `git push`, `git merge`, `git rebase`
 
 === Tests
 

@@ -67,7 +67,7 @@ newpipe-plugin/
 
 == P3 — Règles Absolues
 
-*Git* — Interdictions formelles : `git add`, `git commit`, `git push`, `git commit --amend`
+*Git* — commit/push/merge autorisés (décision pilote 2026-09-17). Ne JAMAIS commiter de secret.
 
 *Fichiers de configuration* — Règle née de l'incident `site.yml` (bakery-plugin, session 2) :
 . Vérifier `git check-ignore` + `git ls-files` AVANT toute modification
