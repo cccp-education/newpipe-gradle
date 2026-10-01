@@ -101,3 +101,4 @@ _Sessions antérieures_ : le projet `newpipe-gradle/` a 9 sessions pré-gouverna
 | `.agents/encyclopedies/*.adoc` | COLD | Jamais auto
 | `.agents/backup/*/` | COLD | Read-only
 |===
+

@@ -75,3 +75,4 @@ newpipe-gradle/                      # REPO GIT
 | magic-stick | `foundry/public/magic-stick/` | N2 | 69+
 | plantuml-gradle | `foundry/public/plantuml-gradle/plantuml-plugin/` | N2 | 138+
 |===
+
