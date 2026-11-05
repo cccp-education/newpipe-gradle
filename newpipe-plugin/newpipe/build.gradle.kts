@@ -1,3 +1,5 @@
+import org.gradle.plugin.compatibility.compatibility
+
 plugins {
     `kotlin-dsl`
     `java-gradle-plugin`
@@ -70,6 +72,7 @@ gradlePlugin {
             compatibility {
                 features {
                     configurationCache = false
+                    isolatedProjects = false
                 }
             }
         }
