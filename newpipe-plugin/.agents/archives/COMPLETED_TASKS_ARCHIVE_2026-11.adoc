@@ -1,0 +1,23 @@
+= COMPLETED_TASKS_ARCHIVE — Novembre 2026
+:date: 2026-11-12
+
+== Session 004 — Producteur de bibliothèque musicale ✅
+
+* `com.cheroliv.newpipe.music` : `MusicLicence` (fail-closed), `MusicSource`/
+  `MusicSourceConfig`, `MusicLibraryTrack`/`Manifest` (miroir N1),
+  `MusicLibraryBuilder` (gate + mapping + ids + sha256).
+* Tâche `buildMusicLibrary` (jaudiotagger, JSON), DSL
+  `newpipe.musicSourcesPath`/`musicLibraryPath`, `music-sources.example.yml`.
+* Audio gitignoré ; manifeste versionné. Consommé par hyperframes
+  (HF-MUSIC-LIBRARY US-1→US-7).
+* Rapport `.agents/sessions/004-music-library-producer.adoc`.
+
+== Session 005 — Publication Portal tentée : blocage propriété de groupe 🟠
+
+* `:newpipe:build -x test` + `:newpipe:validatePlugins` **VERTS** ; le plugin
+  n'est pas sur le Portal (marqueur 404).
+* `publishPlugins` refusé : « You are not the owner of group `education.cccp` »
+  — les clés locales authentifient un compte non propriétaire.
+* **Aucun artefact téléversé** (version `0.0.1` non consommée).
+* Déblocage : clés du compte propriétaire ou transfert de propriété.
+* Rapport `.agents/sessions/005-portal-blocked-group-ownership.adoc`.

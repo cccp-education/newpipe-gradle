@@ -1,0 +1,47 @@
+= PROMPT_REPRISE — NewPipe (Nashville) (Session 005 TERMINÉE → 006)
+:session: 006
+:borough: Nashville
+:session_precedente: 005 — publication Portal tentée : blocage propriété de groupe 🟠
+_note_ : fichier canonique = `.agents/PROMPT_REPRISE.adoc` (remplace le legacy
+`PROMPT_REPRISE.md` à la racine, périmé depuis avril 2026).
+
+== Session 005 (TERMINÉE) — Portal bloqué
+
+* `./gradlew :newpipe:build -x test` + `:newpipe:validatePlugins` **VERTS**.
+* Le plugin **n'est pas** sur le Portal (marqueur 404).
+* `publishPlugins` refusé par le serveur : « You are not the owner of group
+  `education.cccp` » — les clés locales (`gradle.publish.key/secret`)
+  authentifient un compte **non propriétaire** du groupe.
+* **Aucun artefact téléversé** : la version `0.0.1` reste non consommée.
+* Rapport `.agents/sessions/005-portal-blocked-group-ownership.adoc`.
+
+== État
+
+* EPIC `Auth` (download authentifié) : 100 % (42/42) ✅.
+* EPIC `Music` (producteur `music-library.json`, licence fail-closed) :
+  **US-1 ✅ S-004** — consommé par hyperframes (HF-MUSIC-LIBRARY US-1→US-7).
+* EPIC `Portal` : 🟠 **bloqué propriété de groupe** (rien de technique).
+* EPIC `LLM` : en attente (aucun cadrage actionnable).
+* EPIC `Test` (couverture > 50 %) : en attente.
+
+== Mission Session 006 — au choix pilote
+
+. **Débloquer le Portal** (seul vrai chemin) : fournir les clés du compte
+   propriétaire du groupe `education.cccp` (`CCCP_GRADLE_PUBLISH_KEY`/`SECRET`,
+   ou `gradle.publish.key`/`secret` de ce compte), puis rejouer
+   `./gradlew :newpipe:publishPlugins --no-daemon` et vérifier HTTP 200 du
+   marqueur `education/cccp/newpipe/education.cccp.newpipe.gradle.plugin`.
+   Alternative organisationnelle : transfert de propriété du groupe
+   (cf. `gradle-plugin-github-oauth-dissociation.adoc`).
+. **EPIC LLM** : cadrer (création de contenu from scratch) — aucun code aujourd'hui.
+. **EPIC Test** : augmenter la couverture (> 50 %) — chantier autonome.
+
+== Points d'attention
+
+* **Local = Build, Tests = CI** ; git/publication accordés (décision pilote
+  2026-11-11, tous repos publics).
+* Ne **jamais** committer `sessions.yml`, `client_secrets/*.json`, ni l'audio
+  (`downloads/`) : `git check-ignore` avant toute lecture.
+* `NewPipeExtractor` est **GPL-3.0** : la frontière reste **de données**
+  (manifeste + fichiers audio), jamais une dépendance de code des boroughs N2.
+* Zéro secret ; zéro Python ; English only code/tests/features.
