@@ -395,15 +395,15 @@ Scenario: Toutes sessions invalides → Fallback anonyme + message clair
 
 ## 📝 Procédure de Session OpenCode
 
-### ⚠️ RÈGLE D'OR : GIT INTERDICTIONS
+### Git — AUTORISÉ (décision pilote 2026-11-11)
 
-**OpenCode NE DOIT JAMAIS** :
-- ❌ `git commit` - Interdit
-- ❌ `git push` - Interdit
+**Politique** :
+- ✅ `git commit` - Autorisé (décision pilote 2026-11-11)
+- ✅ `git push` - Autorisé (décision pilote 2026-11-11)
 - ❌ `git rollback` - Interdit
 - ❌ `git revert` - Interdit
 
-**Seul l'utilisateur peut** gérer Git manuellement après validation.
+**Invariants** : ne jamais committer de secret ; `--amend` déconseillé ; `rollback`/`revert` sur ordre explicite seulement.
 
 ---
 

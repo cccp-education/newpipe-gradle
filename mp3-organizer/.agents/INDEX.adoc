@@ -11,7 +11,7 @@ _Session en cours_ : 000 — Bootstrap gouvernance agent
 '''
 == RÈGLES ABSOLUES (résumé)
 
-=== 1. COMMITS/GIT — INTERDICTION FORMELLE
+=== 1. COMMITS/GIT — AUTORISÉS (décision pilote 2026-11-11 : tous repos publics)
 === 2. FICHIERS DE CONFIG — BACKUP AVANT MODIF
 === 3. TESTS EN FIN DE SESSION — INTERDIT sans permission
 === 4. 6 ÉTAPES FIN DE SESSION

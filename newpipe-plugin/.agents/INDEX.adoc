@@ -13,9 +13,9 @@
 
 *publishToMavenLocal* obligatoire après toute modif de code source du plugin.
 
-=== 1. Git — Interdictions
+=== 1. Git — Politique (décision pilote 2026-11-11)
 
-❌ `git add`, `git commit`, `git push`, `git commit --amend`
+✅ `git add`, `git commit`, `git push` (décision pilote 2026-11-11) ; `--amend` déconseillé
 ✅ `git status`, `git diff`, `git log`
 
 === 1b. Fichiers de Configuration — Sûreté
