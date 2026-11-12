@@ -1,0 +1,78 @@
+= Session 005 — Publication Portal tentée : blocage propriété de groupe
+:toc:
+:_session_: 005
+:_date_: 2026-11-12
+:_borough_: Nashville (newpipe) — session transverse déclenchée depuis Watts (hyperframes, S-052)
+:_statut_: 🟠 BLOQUÉ (cause organisationnelle, pas technique)
+
+== Mission
+
+Clore l'EPIC `Portal` (publication du plugin `education.cccp.newpipe` sur le
+Gradle Plugin Portal, compte `cccp-education`), dernier item « actionnable » du
+borough après le producteur de bibliothèque musicale (S-004).
+
+== Constat
+
+Le plugin **n'est pas** sur le Portal : le marqueur
+`education/cccp/newpipe/education.cccp.newpipe.gradle.plugin` répond **404**
+(`plugins.gradle.org/plugin/education.cccp.newpipe` → 400).
+
+Le build local est sain :
+
+[source,shell]
+----
+./gradlew :newpipe:build -x test          # BUILD SUCCESSFUL
+./gradlew :newpipe:validatePlugins        # BUILD SUCCESSFUL
+----
+
+La configuration de publication est conforme au standard 2026-11-05 :
+`gradlePlugin.plugins.newpipePlugin` (id `education.cccp.newpipe`,
+`implementationClass`, `displayName`, `description`, `tags`,
+`compatibility { configurationCache = false; isolatedProjects = false }`),
+`website` + `vcsUrl`.
+
+Tentative réelle :
+
+[source,shell]
+----
+./gradlew :newpipe:publishPlugins --no-daemon
+----
+
+Réponse du serveur :
+
+----
+Failed to post to server.
+Server responded with:
+You are not the owner of group education.cccp
+----
+
+== Diagnostic
+
+Les clés présentes dans `~/.gradle/gradle.properties` (`gradle.publish.key` /
+`gradle.publish.secret`) **authentifient un compte qui n'est pas propriétaire**
+du groupe `education.cccp` sur le Portal. Aucun artefact n'a été téléversé : la
+version `0.0.1` reste **non consommée** (rejouable dès que l'accès est rétabli).
+
+Deux voies de déblocage :
+
+. **Clés du compte propriétaire** — fournir `gradle.publish.key`/`secret` du
+   compte `education.cccp` (en CI : `CCCP_GRADLE_PUBLISH_KEY`/`SECRET`), puis
+   rejouer `publishPlugins`.
+. **Transfert de propriété** du groupe `education.cccp` vers le compte utilisé
+   (démarche déjà documentée dans `gradle-plugin-github-oauth-dissociation.adoc` :
+   l'authentification du Portal est OAuth2, pas e-mail/mot de passe).
+
+== Décision
+
+* **Aucune modification de code** : le blocage est organisationnel.
+* L'EPIC `Portal` passe de « 80 % (8/10) » à 🟠 **bloqué propriété de groupe**
+  (trace dans `.agents/INDEX.adoc`, roadmap).
+* La version `0.0.1` reste disponible (rien n'a été publié).
+* Prochaine action = fourniture des clés du compte propriétaire (ou transfert),
+  puis `./gradlew :newpipe:publishPlugins --no-daemon` + vérification HTTP 200
+  du marqueur.
+
+== Hygiène
+
+Zéro secret affiché, zéro secret commité, zéro test local (Local = Build),
+zéro publication effective.

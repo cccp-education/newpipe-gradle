@@ -24,3 +24,14 @@ HF-MUSIC-LIBRARY US-1. Package `com.cheroliv.newpipe.music` :
 mapping + ids + sha256), tâche `buildMusicLibrary` (jaudiotagger, JSON).
 DSL `newpipe.musicSourcesPath`/`musicLibraryPath` ; `music-sources.example.yml`.
 Local = Build vert. Rapport `.agents/sessions/004-music-library-producer.adoc`.
+
+== Session 005 — Publication Portal tentée : blocage propriété de groupe — 2026-11-12
+
+`./gradlew :newpipe:build -x test` + `:newpipe:validatePlugins` VERTS ; le plugin
+n'est pas sur le Portal (marqueur 404). `publishPlugins` est refusé par le
+serveur : « You are not the owner of group `education.cccp` » — les clés locales
+`gradle.publish.key/secret` authentifient un compte non propriétaire du groupe.
+Aucun artefact téléversé (version `0.0.1` non consommée). Déblocage : clés du
+compte propriétaire (`CCCP_GRADLE_PUBLISH_KEY`/`SECRET`) ou transfert de
+propriété (cf. `gradle-plugin-github-oauth-dissociation.adoc`). Aucune
+modification de code. Rapport `.agents/sessions/005-portal-blocked-group-ownership.adoc`.

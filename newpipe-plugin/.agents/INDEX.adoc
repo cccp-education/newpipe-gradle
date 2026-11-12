@@ -68,7 +68,7 @@ _Sessions antérieures_ : le projet `newpipe-gradle/` a 9 sessions pré-gouverna
 |===
 | EPIC | Titre | Statut | Priorité
 | Auth | Download Authentifié YouTube | 100% (42/42) | ✅
-| Portal | Publication Plugin Portal cccp-education | 80% (8/10) | 🔴
+| Portal | Publication Plugin Portal cccp-education | 🟠 **Bloqué propriété de groupe** — build + `validatePlugins` VERTS, `publishPlugins` refusé par le serveur : « You are not the owner of group `education.cccp` ». Les clés locales (`gradle.publish.key/secret`) portent un autre compte que le propriétaire du groupe. Requis : clés du compte `cccp-education` (`CCCP_GRADLE_PUBLISH_KEY`/`SECRET`) **ou** transfert de propriété (cf. `gradle-plugin-github-oauth-dissociation.adoc`) | 🔴
 | LLM | Intégration IA (création from scratch) | En attente | 🔴
 | Music | Producteur bibliothèque musicale (`music-library.json`, licence fail-closed) | US-1 ✅ (S-004) | 🟢
 | Test | Augmenter couverture de tests (>50%) | En attente | 🟠
