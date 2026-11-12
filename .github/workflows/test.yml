@@ -1,0 +1,38 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - "newpipe-plugin/**"
+      - ".github/workflows/test.yml"
+  pull_request:
+    paths:
+      - "newpipe-plugin/**"
+  workflow_dispatch:
+
+jobs:
+  unit:
+    name: Unit tests (newpipe)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: newpipe-plugin
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Run unit tests
+        run: ./gradlew :newpipe:test --no-daemon --console=plain
