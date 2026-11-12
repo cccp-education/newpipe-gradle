@@ -42,3 +42,9 @@ Ce fichier suit l'état des tests du plugin.
 . Ajouter des tests pour `LlmClient.kt` une fois migré
 . Ajouter des tests fonctionnels avec Gradle TestKit
 . Atteindre > 50% de couverture
+
+== HF-MUSIC-LIBRARY US-1 (2026-11-12)
+
+`MusicLibraryBuilderTest` — 8 unit (gate de licence fail-closed, `allowUnlicensed`,
+énergie hors bornes, dossier non déclaré, ids distincts, dossier absent, slug).
+Local = Build ; CI `Test` verte (workflow `test.yml` ajouté S-004).
