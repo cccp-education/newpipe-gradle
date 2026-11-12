@@ -1,0 +1,62 @@
+= Rapport de session 004 — Producteur de bibliothèque musicale
+:session: 004
+:borough: Nashville (newpipe)
+:date: 2026-11-12
+:statut: ✅ TERMINÉ (code compilé ; tests délégués CI)
+
+== Mission
+
+US-1 de l'EPIC **HF-MUSIC-LIBRARY** (hyperframes S-050) : réactiver le borough
+comme **producteur** d'une bibliothèque musicale (`music-library.json`) à partir
+des audios extraits, avec **gate de licence obligatoire**.
+
+== Constat
+
+* Le borough savait extraire YouTube→MP3 (`collectMusic`, sessions OAuth) mais
+  ne produisait **aucun manifeste** : ni provenance, ni licence, ni métadonnées
+  esthétiques exploitables par les moteurs vidéo.
+* Le noyau `video-kernel 0.8.0` (S-201) fournit désormais le contrat neutre
+  (`video.kernel.music`) consommé par hyperframes/capsule.
+
+== Livré (package `com.cheroliv.newpipe.music`)
+
+* `MusicLicence` — énumération **fail-closed** (`own`, `cc0`, `cc-by`,
+  `royalty-free`, `licensed`, `unknown`) + `wireName` aligné sur le noyau.
+* `MusicSource` / `MusicSourceConfig` — `music-sources.yml` : artiste + licence
+  **obligatoire** + attribution + mood + tags + énergie.
+* `MusicLibraryTrack` / `MusicLibraryManifest` — forme JSON **miroir** du modèle
+  N1 (`schemaVersion: 1`), sérialisée par Jackson.
+* `MusicLibraryBuilder` — pur (durée/tags/sha256 injectés) : gate de licence,
+  mapping artiste→fichiers, ids déterministes (`slug + sha`), chemins relatifs
+  portables (`/`), fichiers dans un dossier **non déclaré** ignorés et comptés.
+* `BuildMusicLibraryTask` — tâche `buildMusicLibrary` (groupe `collect`) :
+  lit `music-sources.yml`, scanne `downloads/`, lit les tags/durée
+  (jaudiotagger), écrit `music-library.json` ; **échoue** avec un message
+  actionnable sur licence inconnue / énergie hors 0..100 / dossier absent.
+* DSL étendu : `newpipe.musicSourcesPath`, `newpipe.musicLibraryPath`.
+* `music-sources.example.yml` versionné (licences admises documentées) ;
+  l'audio reste dans `downloads/` (déjà gitignoré, jamais publié).
+
+== Garde-fous
+
+* **Fail-closed** : aucune piste sans licence déclarée n'entre dans le manifeste
+  (sauf `allowUnlicensed` explicite, dogfooding, piste marquée `unknown`).
+* **Zéro réseau** dans la tâche : elle ne lit que le disque.
+* Aucun secret ; aucun audio versionné.
+
+== Tests (délégués CI)
+
+`MusicLibraryBuilderTest` (8) : licence autorisée, licence inconnue rejetée,
+`allowUnlicensed`, énergie hors bornes, dossier non déclaré, ids distincts,
+dossier absent, slug.
+
+== Gates
+
+* Local = Build : `:newpipe:compileKotlin` + `:newpipe:compileTestKotlin`
+  **VERTS**.
+
+== Suite
+
+US-3 (hyperframes) : balises `[.hyperframes-music]`/`[.hyperframes-sfx]` +
+résolution du manifeste (copie `sha256`) + injection timeline. Puis US-6
+(capsule) et US-7 (attribution `cc-by`).

@@ -15,3 +15,12 @@ Mis à jour à chaque fin de session.
 | 000 | 2026-05-02 | chore | Bootstrap gouvernance agent (Eager/Lazy, Hot/Warm/Cold, encyclopedie) | 8/10
 |===
 
+
+== Session 004 — Producteur de bibliothèque musicale — 2026-11-12
+
+HF-MUSIC-LIBRARY US-1. Package `com.cheroliv.newpipe.music` :
+`MusicLicence` (fail-closed), `MusicSource`/`MusicSourceConfig`,
+`MusicLibraryTrack`/`Manifest` (miroir N1), `MusicLibraryBuilder` (gate +
+mapping + ids + sha256), tâche `buildMusicLibrary` (jaudiotagger, JSON).
+DSL `newpipe.musicSourcesPath`/`musicLibraryPath` ; `music-sources.example.yml`.
+Local = Build vert. Rapport `.agents/sessions/004-music-library-producer.adoc`.

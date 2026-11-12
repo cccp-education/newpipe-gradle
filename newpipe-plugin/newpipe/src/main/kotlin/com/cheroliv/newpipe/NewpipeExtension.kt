@@ -35,6 +35,14 @@ open class NewpipeExtension @Inject constructor(objects: ObjectFactory) {
         .property(Boolean::class.java)
         .convention(false)
 
+    val musicSourcesPath: Property<String> = objects
+        .property(String::class.java)
+        .convention("music-sources.yml")
+
+    val musicLibraryPath: Property<String> = objects
+        .property(String::class.java)
+        .convention("music-library.json")
+
     companion object {
         const val DEFAULT_FFMPEG_IMAGE = "jrottenberg/ffmpeg:4.4-alpine"
     }

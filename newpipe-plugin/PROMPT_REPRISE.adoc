@@ -1,37 +1,36 @@
-= PROMPT_REPRISE — Session 004
-:date: 2026-06-14
-:session: 004
-:type: publication
-:title: Publication Plugin Portal cccp-education
+= PROMPT_REPRISE — Session 005
+:date: 2026-11-12
+:session: 005
+:type: feature
+:title: US-3 HF-MUSIC-LIBRARY — consommation hyperframes
 :status: pending
-:previous_session: 003 (Migration Plugin Portal + consolidation)
+:previous_session: 004 (Producteur bibliothèque musicale US-1)
 
 == Mission
 
-Publier le plugin NewPipe v0.0.1 sur le Gradle Plugin Portal
-sous le compte `cccp-education`.
+US-3 de l'EPIC `HF-MUSIC-LIBRARY` (piloté par hyperframes, S-050) : côté
+hyperframes, consommer le manifeste produit ici.
 
 == Contexte
 
-- Build : ✅ SUCCESSFUL
-- Version : 0.0.1
-- Plugin ID : `education.cccp.newpipe`
-- GroupId : `education.cccp`
-- NewPipeExtractor : v0.26.3 (via JitPack)
-- `plugin-publish` : 2.1.1 configuré
-- `compatibility { features { configurationCache = false } }` déclaré
-- `vcsUrl` : `https://github.com/cccp-education/newpipe-gradle.git`
-- Credentials : `GRADLE_PUBLISH_KEY` + `GRADLE_PUBLISH_SECRET` en env vars
+- `buildMusicLibrary` (session 004 ✅) produit `music-library.json`
+  (`schemaVersion: 1`) à partir de `music-sources.yml` + `downloads/`.
+- Gate de licence fail-closed : `own|cc0|cc-by|royalty-free|licensed`.
+- Noyau `video-kernel 0.8.0` : `MusicTrack`, `MusicLibrary`,
+  `MusicTrackSelector`, `SoundCue`, `SoundSequence`, `SoundSequenceValidator`.
+- Audio dans `downloads/` (gitignoré) ; seul le manifeste est versionné.
 
-== À Faire
+== À faire (session côté newpipe, si besoin)
 
-. `./gradlew :newpipe:publishPlugins`
-. Vérifier l'approbation sur https://plugins.gradle.org/u/cccp-education
-. Mettre à jour EPIC Portal → 100% (10/10)
+. Rien d'obligatoire : le producteur est livré. Vérifier la CI de la session 004.
+. Si un vrai manifeste est nécessaire : déclarer `music-sources.yml` (licences
+   détenues) puis `./gradlew buildMusicLibrary` (audio déjà extrait via
+   `collectMusic`).
+. Tenir `music-sources.example.yml` à jour si le schéma évolue.
 
-== Commandes
+== Rappels
 
-```bash
-./gradlew :newpipe:clean :newpipe:build
-./gradlew :newpipe:publishPlugins
-```
+- **Local = Build, Tests = CI** ; accords pilote/publication/git accordés
+  (2026-11-11, tous repos publics).
+- Zéro secret ; audio jamais commité/publié.
+- Ne pas relancer d'extraction réseau sans nécessité (auth + ToS + licence).

@@ -66,6 +66,20 @@ object NewpipeManager {
             sessionsPath = extension.sessionsPath.get()
             dependsOn(authSessions)
         }
+
+        registerBuildMusicLibraryTask(project, extension)
+    }
+
+    fun registerBuildMusicLibraryTask(project: Project, extension: NewpipeExtension) {
+        project.tasks.register("buildMusicLibrary", com.cheroliv.newpipe.music.BuildMusicLibraryTask::class.java) {
+            group = "collect"
+            description = "Build the versioned music-library.json from declared licensed sources"
+            sourcesFile.convention(extension.musicSourcesPath)
+            downloadsDir.set(extension.outputPath.map { it.ifBlank { "downloads" } })
+            outputFile.set(project.layout.projectDirectory.file(extension.musicLibraryPath.get()))
+            allowUnlicensed.convention(false)
+            projectDir.set(project.layout.projectDirectory)
+        }
     }
 
     fun buildSessionManager(sessionsPath: String): SessionManager {

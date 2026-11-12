@@ -1,0 +1,25 @@
+# HF-MUSIC-LIBRARY (US-1) — declared, LICENSED music sources.
+#
+# Copy to `music-sources.yml` and declare every artist folder of `downloads/`.
+# The `buildMusicLibrary` task fails (fail-closed) on a missing or unknown
+# licence, so an unlicensed track can never reach the versioned manifest.
+#
+# Allowed licences:
+#   own           you composed / recorded the track
+#   cc0           public-domain dedication
+#   cc-by         Creative Commons Attribution (attribution is required)
+#   royalty-free  royalty-free licence
+#   licensed      explicit written licence for this use
+#
+# `mood`, `tags` and `energy` (0..100) are the aesthetic hints the video engines
+# use to select a track when the AsciiDoc cue declares a mood instead of an id.
+#
+# The audio files live in `downloads/` (gitignored); only `music-library.json`
+# (metadata + provenance) is versioned.
+sources:
+  - artist: "Mon son 2"
+    licence: own
+    attribution: ""
+    mood: calm
+    tags: [piano, ambient]
+    energy: 20

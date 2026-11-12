@@ -54,6 +54,7 @@
 
 |===
 | N | Date | Type | Sujet | Score
+| 004 | 2026-11-12 | feature | **HF-MUSIC-LIBRARY US-1 : producteur `music-library.json`** (licence fail-closed, `buildMusicLibrary`, `music-sources.yml`) | 9/10
 | 003 | 2026-06-14 | publication | Migration Plugin Portal cheroliv→cccp-education + fix build + upgrade NewPipeExtractor v0.26.3 + consolidation produit | 9/10
 | 002 | 2026-06-02 | governance | Borough-isation VESTIGE — newpipe-gradle devient Nashville 🎶 | 8/10
 | 001 | 2026-05-02 | chore | Extraction documentation parent (.md→.adoc), enrichissement encyclopédie COLD (1129 lignes), nettoyage ../ | 9/10
@@ -69,6 +70,7 @@ _Sessions antérieures_ : le projet `newpipe-gradle/` a 9 sessions pré-gouverna
 | Auth | Download Authentifié YouTube | 100% (42/42) | ✅
 | Portal | Publication Plugin Portal cccp-education | 80% (8/10) | 🔴
 | LLM | Intégration IA (création from scratch) | En attente | 🔴
+| Music | Producteur bibliothèque musicale (`music-library.json`, licence fail-closed) | US-1 ✅ (S-004) | 🟢
 | Test | Augmenter couverture de tests (>50%) | En attente | 🟠
 ===
 
