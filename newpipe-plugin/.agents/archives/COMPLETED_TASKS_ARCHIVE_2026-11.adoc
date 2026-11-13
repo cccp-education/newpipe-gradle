@@ -21,3 +21,12 @@
 * **Aucun artefact téléversé** (version `0.0.1` non consommée).
 * Déblocage : clés du compte propriétaire ou transfert de propriété.
 * Rapport `.agents/sessions/005-portal-blocked-group-ownership.adoc`.
+
+== S-006 — GBL-013 vague 2 : CI sur l'image de runtime ✅
+
+* `ci/run.sh` (`:newpipe:test`) + `test.yml` épinglé sur
+  `cccpeducation/cccp-ci-base@sha256:4722c1bc…` ; `setup-java` et `chmod`
+  supprimés ; foojay provisionne la toolchain 11.
+* Run `43501434643` VERT (commit `011c152`).
+* Rapport `.agents/sessions/006-gbl-013-wave2.adoc`.
+

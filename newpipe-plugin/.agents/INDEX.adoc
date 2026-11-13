@@ -1,3 +1,10 @@
+== Session 006 — GBL-013 vague 2 (2026-11-14)
+
+`ci/run.sh` (`fast`/`test` = `:newpipe:test`) + `test.yml` épinglé sur
+`cccpeducation/cccp-ci-base@sha256:4722c1bc…` ; `setup-java` (JDK 21) et
+`chmod` supprimés ; foojay provisionne la toolchain 11. Run `43501434643`
+**VERT** (commit `011c152`). Rapport `.agents/sessions/006-gbl-013-wave2.adoc`.
+
 == Règles Absolues (Exécutif)
 
 === 0. Environnement de Dev

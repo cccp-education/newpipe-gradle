@@ -1,9 +1,17 @@
-= PROMPT_REPRISE — NewPipe (Nashville) (Session 005 TERMINÉE → 006)
-:session: 006
+= PROMPT_REPRISE — NewPipe (Nashville) (Session 006 TERMINÉE → 007)
+:session: 007
 :borough: Nashville
-:session_precedente: 005 — publication Portal tentée : blocage propriété de groupe 🟠
+:session_precedente: 006 — GBL-013 vague 2 (CI sur l'image de runtime) ✅
 _note_ : fichier canonique = `.agents/PROMPT_REPRISE.adoc` (remplace le legacy
 `PROMPT_REPRISE.md` à la racine, périmé depuis avril 2026).
+
+== Session 006 (TERMINÉE) — GBL-013 vague 2 : CI sur l'image de runtime
+
+* `ci/run.sh` (`fast`/`test` = `:newpipe:test`) + `test.yml` épinglé sur
+  `cccpeducation/cccp-ci-base@sha256:4722c1bc…` ; `setup-java` (JDK 21) et
+  `chmod` supprimés ; foojay provisionne la toolchain 11.
+* Run `43501434643` **VERT** (commit `011c152`). Rapport
+  `.agents/sessions/006-gbl-013-wave2.adoc`.
 
 == Session 005 (TERMINÉE) — Portal bloqué
 

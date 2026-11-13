@@ -1,0 +1,20 @@
+= Session 006 — GBL-013 vague 2 : gate CI sur l'image de runtime
+:date: 2026-11-14
+:borough: Nashville (newpipe-gradle)
+
+== Livré
+
+* `ci/run.sh` — `fast`/`test` = `./gradlew :newpipe:test`.
+* `.github/workflows/test.yml` migré : `container:` épinglé sur
+  `cccpeducation/cccp-ci-base@sha256:4722c1bc…`, `setup-java` (JDK 21) supprimé,
+  `chmod` supprimé, `setup-gradle` + `ci/run.sh test`.
+* Run `43501434643` **VERT** (commit `011c152`).
+
+== Notes
+
+Le projet déclare `jvmToolchain(11)` et le resolver foojay : la toolchain est
+provisionnée par le build, indépendamment du JDK 25 de l'image.
+
+== Suivant
+
+US-5 se poursuit sur les dépôts restants de la vague 2.

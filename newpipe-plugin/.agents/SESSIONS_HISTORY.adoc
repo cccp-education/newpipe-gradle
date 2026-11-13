@@ -35,3 +35,12 @@ Aucun artefact téléversé (version `0.0.1` non consommée). Déblocage : clés
 compte propriétaire (`CCCP_GRADLE_PUBLISH_KEY`/`SECRET`) ou transfert de
 propriété (cf. `gradle-plugin-github-oauth-dissociation.adoc`). Aucune
 modification de code. Rapport `.agents/sessions/005-portal-blocked-group-ownership.adoc`.
+
+== Session 006 — GBL-013 vague 2 : gate CI sur l'image de runtime — 2026-11-14
+
+`ci/run.sh` (`fast`/`test` = `:newpipe:test`) et `test.yml` épinglé sur
+`cccpeducation/cccp-ci-base@sha256:4722c1bc…` ; `setup-java` (JDK 21) et `chmod`
+supprimés. Le resolver foojay provisionne la toolchain 11 du projet.
+Run `43501434643` **VERT** (commit `011c152`). Rapport
+`.agents/sessions/006-gbl-013-wave2.adoc`.
+
