@@ -111,3 +111,9 @@ _Sessions antérieures_ : le projet `newpipe-gradle/` a 9 sessions pré-gouverna
 | `.agents/backup/*/` | COLD | Read-only
 |===
 
+
+== Session 007 — EAGER : publication JitPack canal unique (2026-11-14)
+
+Alignement EAGER (AGENT/PROMPT_REPRISE) : JitPack canal unique ;
+Central/Portal retirés. Zéro code. Rapport
+`.agents/sessions/007-eager-publication-jitpack-only.adoc`.

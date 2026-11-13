@@ -44,3 +44,9 @@ supprimés. Le resolver foojay provisionne la toolchain 11 du projet.
 Run `43501434643` **VERT** (commit `011c152`). Rapport
 `.agents/sessions/006-gbl-013-wave2.adoc`.
 
+
+== Session 007 — EAGER : publication JitPack canal unique — 2026-11-14
+
+Alignement EAGER : JitPack canal unique ; Maven Central/Sonatype et
+Gradle Plugin Portal **retirés**. Aucun code, aucun test, aucune
+publication. Rapport `.agents/sessions/007-eager-publication-jitpack-only.adoc`.
