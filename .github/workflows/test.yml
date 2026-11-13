@@ -17,22 +17,22 @@ jobs:
   unit:
     name: Unit tests (newpipe)
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: newpipe-plugin
+    timeout-minutes: 15
+    container:
+      image: cccpeducation/cccp-ci-base@sha256:4722c1bcc71c0343c05257842b774715fc2574ff79182599a29fe8c1361cbeb3
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: "21"
-          distribution: "temurin"
-          cache: gradle
+      - name: Verify Gradle wrapper version
+        uses: cccp-education/conventions-gradle/.github/actions/verify-gradle-wrapper@main
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
 
+      # GBL-013 US-5 — the runtime image provides JDK 25; the plugin's
+      # foojay resolver provisions the JDK 11 toolchain. `ci/run.sh test`
+      # runs the newpipe unit tests.
       - name: Run unit tests
-        run: ./gradlew :newpipe:test --no-daemon --console=plain
+        run: ci/run.sh test
