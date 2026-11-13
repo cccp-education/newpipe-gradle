@@ -28,19 +28,16 @@ _note_ : fichier canonique = `.agents/PROMPT_REPRISE.adoc` (remplace le legacy
 * EPIC `Auth` (download authentifié) : 100 % (42/42) ✅.
 * EPIC `Music` (producteur `music-library.json`, licence fail-closed) :
   **US-1 ✅ S-004** — consommé par hyperframes (HF-MUSIC-LIBRARY US-1→US-7).
-* EPIC `Portal` : 🟠 **bloqué propriété de groupe** (rien de technique).
+* EPIC `Publication` : ✅ **JitPack** (canal unique) — le blocage Portal est **caduque** (Portal retiré).
 * EPIC `LLM` : en attente (aucun cadrage actionnable).
 * EPIC `Test` (couverture > 50 %) : en attente.
 
 == Mission Session 006 — au choix pilote
 
-. **Débloquer le Portal** (seul vrai chemin) : fournir les clés du compte
-   propriétaire du groupe `education.cccp` (`CCCP_GRADLE_PUBLISH_KEY`/`SECRET`,
-   ou `gradle.publish.key`/`secret` de ce compte), puis rejouer
-   `./gradlew :newpipe:publishPlugins --no-daemon` et vérifier HTTP 200 du
-   marqueur `education/cccp/newpipe/education.cccp.newpipe.gradle.plugin`.
-   Alternative organisationnelle : transfert de propriété du groupe
-   (cf. `gradle-plugin-github-oauth-dissociation.adoc`).
+. **Publier sur JitPack** : tag annoté `vX.Y.Z` + push `main`/tag ; vérifier
+   HTTP 200 du POM/JAR (`com.github.cccp-education.newpipe-gradle:newpipe-plugin:X.Y.Z`).
+   Aucun credential, aucun `publishPlugins` : Maven Central et Plugin Portal
+   sont **retirés** (CNV-17).
 . **EPIC LLM** : cadrer (création de contenu from scratch) — aucun code aujourd'hui.
 . **EPIC Test** : augmenter la couverture (> 50 %) — chantier autonome.
 

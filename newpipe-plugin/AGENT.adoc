@@ -25,8 +25,8 @@
 *Version* : 0.0.1
 *Plugin ID* : `education.cccp.newpipe`
 *GroupId* : `education.cccp`
-*Publication cible* : Gradle Plugin Portal (compte `cccp-education`)
-*Particularité* : dépendance JitPack (`com.github.TeamNewPipe:NewPipeExtractor:v0.26.3`) — refusée par Maven Central, acceptée par Plugin Portal
+*Publication cible* : **JitPack** (canal unique, tag `vX.Y.Z`)
+*Particularité* : dépendance JitPack (`com.github.TeamNewPipe:NewPipeExtractor:v0.26.3`) — cohérente avec le canal unique (Maven Central et Plugin Portal sont retirés)
 
 [CAUTION]
 ====
@@ -259,18 +259,18 @@ buildSessions → authSessions (Device Flow) → sessions.yml enrichi → collec
 
 *Total* : 42/42 points (100%) ✅
 
-.EPIC : Publication Gradle Plugin Portal — cheroliv → cccp-education
+.EPIC : Publication JitPack — cheroliv → cccp-education
 |===
 | US | Titre | Points | Statut
-| PUB-1 | Récupérer credentials cccp-education sur plugins.gradle.org | 2 | ✅ FAIT
-| PUB-2 | Migrer build.gradle.kts (Sonatype → pluginPublish 2.1.1) | 3 | ✅ FAIT
+| PUB-1 | Taguer `vX.Y.Z` + push (JitPack : aucun credential) | 2 | ✅ FAIT
+| PUB-2 | Build autonome (article 0124) + `jitpack.yml` (JDK 25, version dérivée du tag) | 3 | ✅ FAIT
 | PUB-3 | Déclarer compatibility features (configurationCache = false) | 1 | ✅ FAIT
 | PUB-4 | Mettre à jour vcsUrl → github.com/cccp-education/newpipe-gradle | 1 | ✅ FAIT
-| PUB-5 | Publier sur Plugin Portal (`./gradlew :newpipe:publishPlugins`) | 3 | ⏳ À FAIRE
+| PUB-5 | Publier sur JitPack (tag + push) | 3 | ⏳ À FAIRE
 |===
 
 *Total* : 8/10 points (80%)
-*Particularité NewPipe* : dépendance JitPack (`com.github.TeamNewPipe:NewPipeExtractor:v0.26.3`) refusée par Maven Central mais acceptée par Gradle Plugin Portal.
+*Particularité NewPipe* : la dépendance `com.github.TeamNewPipe:NewPipeExtractor:v0.26.3` et le plugin sont servis par JitPack — canal unique cohérent.
 
 .EPIC : Intégration LLM & IA (Futur)
 |===
