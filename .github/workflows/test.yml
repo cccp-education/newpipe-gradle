@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     container:
-      image: cccpeducation/cccp-ci-base@sha256:4722c1bcc71c0343c05257842b774715fc2574ff79182599a29fe8c1361cbeb3
+      image: cccpeducation/cccp-ci-base@sha256:03ead3787ed8f09068cc582191e4cd8f5e48e3ce696fe53836ecd826de57ea1f
 
     steps:
       - name: Checkout repository
