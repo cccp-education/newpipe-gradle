@@ -43,3 +43,13 @@ cd newpipe-plugin && ./gradlew :newpipe:publish closeAndRelease
 | Artefact | URL |
 |---|---|
 | newpipe-plugin | https://central.sonatype.com/artifact/education.cccp/newpipe-plugin |
+
+== Session 008 — GBL-013-10 (CI : actions node24 / Node 26 LTS)
+
+* `test.yml` : `checkout@v7`, `setup-gradle@v6` ; `readme_plantuml.yml` :
+  `checkout@v7`, `setup-java@v6`.
+* Image `ccpeducation/cccp-ci-base` repoinnée sur `sha256:03ead378…` (Node 26.13.1).
+* CI « Test » verte : `43683437649` (`614b530`), `43690092010` (`ec34c49`).
+* Aucun code, aucun test, aucune publication. Rapport
+  `.agents/sessions/008-gbl-013-10-node26-actions.adoc`.
+ |

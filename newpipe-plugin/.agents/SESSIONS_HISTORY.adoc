@@ -9,6 +9,7 @@ Mis à jour à chaque fin de session.
 [cols="1,2,2,4,2", options="header"]
 |===
 | N | Date | Type | Sujet | Score
+| 008 | 2026-11-15 | ci | GBL-013-10 — actions `node24`-natives + image CI Node 26 LTS (CI « Test » verte) | 8/10
 | 003 | 2026-06-14 | publication | Migration Plugin Portal cheroliv→cccp-education + fix build + upgrade NewPipeExtractor v0.26.3 + consolidation produit | 9/10
 | 002 | 2026-06-02 | governance | Borough-isation VESTIGE — newpipe-gradle devient Nashville 🎶 | 8/10
 | 001 | 2026-05-02 | chore | Extraction documentation parent (.md → .adoc), enrichissement COLD, nettoyage ../ | 9/10
@@ -50,3 +51,12 @@ Run `43501434643` **VERT** (commit `011c152`). Rapport
 Alignement EAGER : JitPack canal unique ; Maven Central/Sonatype et
 Gradle Plugin Portal **retirés**. Aucun code, aucun test, aucune
 publication. Rapport `.agents/sessions/007-eager-publication-jitpack-only.adoc`.
+
+== Session 008 — GBL-013-10 : actions `node24`-natives et image CI Node 26 LTS — 2026-11-15
+
+`test.yml` : `checkout@v4→v7`, `setup-gradle@v4→v6` ;
+`readme_plantuml.yml` : `checkout@v4→v7`, `setup-java@v4→v6`. Image
+`cccpeducation/cccp-ci-base` repoinnée sur le digest
+`sha256:03ead378…` (rebâtie Node 26.13.1). Aucun `setup-node` dans ce dépôt.
+CI « Test » **verte** : run `43683437649` (`614b530`) et `43690092010`
+(`ec34c49`). Rapport `.agents/sessions/008-gbl-013-10-node26-actions.adoc`.

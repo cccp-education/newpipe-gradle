@@ -1,0 +1,68 @@
+= Session 008 — GBL-013-10 : actions `node24`-natives et image CI Node 26 LTS
+:toc: left
+:icons: font
+
+:session: 008
+:date: 2026-11-15
+:type: cross-borough / CI (GBL-013-10)
+:statut: TERMINÉE
+:borough: Nashville
+
+== Contexte
+
+Session globale 229 (2026-11-15). GBL-013-10 solde les avertissements
+« Node.js 20 is deprecated » des runners GitHub Actions en migrant les actions
+vers les majeures `node24`-natives, et aligne l'image de runtime CI sur la
+dernière LTS Node (`26.13.1`), rebâtie en `cccp-ci-base`
+(digest `sha256:03ead378…`).
+
+== Changements (état mesuré)
+
+* `614b530` (`ci: run on the latest Node LTS (node 26) and node24-native actions`) :
+  - `.github/workflows/test.yml` : `actions/checkout@v4` → `@v7`,
+    `gradle/actions/setup-gradle@v4` → `@v6` ;
+  - `.github/workflows/readme_plantuml.yml` : `actions/checkout@v4` → `@v7`,
+    `actions/setup-java@v4` → `@v6`.
+* `ec34c49` (`ci: pin the CI image rebuilt on Node 26 LTS (GBL-013-10)`) :
+  `test.yml` — image
+  `cccpeducation/cccp-ci-base@sha256:4722c1bc…` → `sha256:03ead378…`
+  (image rebâtie sur Node 26.13.1).
+* Aucun bloc `setup-node` dans ce dépôt : rien à aligner côté `node-version`
+  dans les workflows (le job fournit JDK 25 et laisse foojay provisionner la
+  toolchain 11).
+* Aucun code Kotlin, aucun test, aucune publication.
+
+== Preuves
+
+|===
+| Élément | Statut
+| `git log` du 2026-11-15 | `614b530`, `ec34c49` (2 commits, working tree propre)
+| Diff | `readme_plantuml.yml` (+2/−2), `test.yml` (+3/−3)
+| CI « Test » sur `614b530` | ✅ **success** — run `43683437649`
+| CI « Test » sur `ec34c49` | ✅ **success** — run `43690092010`
+| Actions `node24`-natives | ✅ checkout v7, setup-gradle v6, setup-java v6
+| Image CI | ✅ `sha256:03ead3787ed8f09068cc582191e4cd8f5e48e3ce696fe53836ecd826de57ea1f`
+| Secret | ✅ aucun
+|===
+
+== Racine de gouvernance et numérotation
+
+Deux `.agents` coexistent : `mp3-organizer/.agents` (application standalone
+MP3 + PostgreSQL, dernière session `000`, 2026-05-12) et
+`newpipe-plugin/.agents` (plugin Gradle — sessions `004`→`007`, dont la vague
+GBL-013 de S-006). Les travaux du 2026-11-15 portent sur les **workflows du
+plugin** : la racine cohérente est donc **`newpipe-plugin/.agents`**, et le
+numéro de clôture est **`008`** (suite de `007`), pas `001`.
+
+== Fichiers touchés (documentation uniquement)
+
+`.agents/sessions/008-gbl-013-10-node26-actions.adoc`,
+`.agents/SESSIONS_HISTORY.adoc`, `.agents/INDEX.adoc`,
+`.agents/archives/COMPLETED_TASKS_ARCHIVE_2026-11.adoc`, `BACKLOG.adoc`,
+`.agents/PROMPT_REPRISE.adoc`.
+
+== Suite
+
+Aucune mission ouverte : publication JitPack (canal `-Pchannel`, défaut
+`jitpack`), EPIC LLM (à cadrer), EPIC Test (couverture). Aucun test local,
+aucune publication, aucun secret.
